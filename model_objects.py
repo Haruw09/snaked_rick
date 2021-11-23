@@ -37,6 +37,11 @@ class Wall:
 
 class Snakes:
     def __init__(self, coordinates, direction):
+        '''
+        :param coordinates: координаты всех квадратиков змейки, начиная с головы
+        :param direction: направление движения змейки в данный момент, характеризуется одной
+        из букв 'w', 'a', 's', 'd'
+        '''
         self.coordinates = coordinates
         self.direction = direction
         self.live = True
@@ -63,6 +68,10 @@ class Snakes:
             self.coordinates[number] = self.coordinates[number - 1]
 
     def move_head(self, new_direction):
+        '''
+        Функция отвечает за движение головы змейки - поворот и продвижение
+        :param new_direction: новое направление движения
+        '''
         if (self.direction == 'w' or self.direction == 's') and (new_direction == 'a' or new_direction == 'd'):
             self.direction = new_direction
         elif (self.direction == 'a' or self.direction == 'd') and (new_direction == 'w' or new_direction == 's'):
@@ -97,7 +106,7 @@ class Food(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
         self.color = GREEN
-        self.actions = []
+        self.actions = [] #Массив действий змейки-еды
         self.mass = 5
 
     def eating(self, coordinates):
