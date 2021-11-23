@@ -64,9 +64,10 @@ class Snakes:
         return 2
 
     def move_tail(self):
+        end = [self.coordinates[-1][0], self.coordinates[-1][1]]
         for number in (1, len(self.coordinates) - 1, 1):
             self.coordinates[number] = self.coordinates[number - 1]
-
+        return end
     def move_head(self, new_direction):
         '''
         Функция отвечает за движение головы змейки - поворот и продвижение
@@ -99,15 +100,17 @@ class Snakes:
 class MainSnake(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
-        self.color = RED
+        self.color = BLUE
+
+    def elongation(self, x_end, y_end):
+        self.coordinates.append([x_end, y_end])
 
 
 class Food(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
         self.color = GREEN
-        self.actions = [] #Массив действий змейки-еды
-        self.mass = 5
+        self.actions = []  # Массив действий змейки-еды
 
     def eating(self, coordinates):
         '''
@@ -115,13 +118,13 @@ class Food(Snakes):
         :return: вывод прибавки к счёту по итогу обработки
         '''
         if self.collision(coordinates) == 0:
-            self.live(False)
-            return self.mass
-        return 0
+            self.live = False
+            return True
+        return False
 
     def death(self, coordinates):
         if self.collision(coordinates) == 1:
-            self.live(False)
+            self.live = False
 
 
 class Enemy(Snakes):
