@@ -1,3 +1,17 @@
+# Цвета
+RED = 0xFF0000
+BLUE = 0x0000FF
+YELLOW = 0xFFC91F
+GREEN = 0x00FF00
+MAGENTA = 0xFF03B8
+CYAN = 0x00FFCC
+BLACK = (0, 0, 0)
+WHITE = 0xFFFFFF
+GREY = 0x7D7D7D
+WIDTH = 40
+HEIGHT = 40
+
+
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):
         """
@@ -7,7 +21,7 @@ class Wall:
         self.y_begin = y_begin
         self.x_end = x_end
         self.y_end = y_end
-        self.color = (0, 0, 0)  # FIXME изменить на COLOR
+        self.color = BLACK
 
     def collision(self, x_snake, y_snake):
         """
@@ -22,14 +36,16 @@ class Wall:
 
 
 class Snakes:
-    def __init__(self, coordinates):
+    def __init__(self, coordinates, direction):
         self.coordinates = coordinates
+        self.direction = direction
+        self.live = True
 
     def collision(self, coordinates):
-        '''
+        """
         :param coordinates - массив координат квадратиков другой змейки
         :return: 0 - дополнительная змейка врезалась в данную, 1 - наоборот, 2 - ничего не произошло
-        '''
+        """
         for position in self.coordinates:
             x = position[0]
             y = position[1]
@@ -46,13 +62,42 @@ class Snakes:
         for number in (1, len(self.coordinates) - 1, 1):
             self.coordinates[number] = self.coordinates[number - 1]
 
+    def move_head(self, new_direction):
+        if (self.direction == 'w' or self.direction == 's') and (new_direction == 'a' or new_direction == 'd'):
+            self.direction = new_direction
+        elif (self.direction == 'a' or self.direction == 'd') and (new_direction == 'w' or new_direction == 's'):
+            self.direction = new_direction
+
+        if self.coordinates[0][0] > WIDTH:
+            self.coordinates[0][0] = 0
+        if self.coordinates[0][0] < 0:
+            self.coordinates[0][0] = WIDTH - 1
+        if self.coordinates[0][1] > HEIGHT:
+            self.coordinates[0][1] = 0
+        if self.coordinates[0][1] < 0:
+            self.coordinates[0][1] = HEIGHT - 1
+
+        if self.direction == 'd':
+            self.coordinates[0][0] += 1
+        elif self.direction == 'a':
+            self.coordinates[0][0] -= 1
+        elif self.direction == 'w':
+            self.coordinates[0][1] -= 1
+        else:
+            self.coordinates[0][1] += 1
+
+
+class MainSnake(Snakes):
+    def __init__(self, coordinates, direction):
+        Snakes.__init__(self, coordinates, direction)
+        self.color = RED
+
 
 class Food(Snakes):
-    def __init__(self, coordinates):
-        Snakes.__init__(self, coordinates)
-        self.color = (100, 100, 100)  # FIXME изменить на COLOR
+    def __init__(self, coordinates, direction):
+        Snakes.__init__(self, coordinates, direction)
+        self.color = GREEN
         self.actions = []
-        self.live = True
         self.mass = 5
 
     def eating(self, coordinates):
@@ -69,11 +114,8 @@ class Food(Snakes):
         if self.collision(coordinates) == 1:
             self.live(False)
 
-    def move(self):
-        self.actions.pop(0)
-
 
 class Enemy(Snakes):
-    def __init__(self, coordinates):
-        Snakes.__init__(self, coordinates)
-        self.color = (200, 200, 200)  # FIXME изменить на COLOR
+    def __init__(self, coordinates, direction):
+        Snakes.__init__(self, coordinates, direction)
+        self.color = MAGENTA
