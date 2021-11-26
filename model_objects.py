@@ -104,6 +104,7 @@ class MainSnake(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
         self.color = BLUE
+        self.death = 0
 
     def elongation(self, x_end, y_end):
         self.coordinates.append([x_end, y_end])

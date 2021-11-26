@@ -56,12 +56,14 @@ for wall in walls:
 DrawSnake(main_snake.coordinates, main_snake.color, screen)
 DrawField(screen)
 
-while not finished:
+while not finished and main_snake.death == 0:
     clock.tick(FPS)
     pygame.display.update()
     screen.fill(WHITE)
     for wall in walls:
         DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
+        if wall.collision(main_snake.coordinates[0][0], main_snake.coordinates[0][1]):
+            main_snake.death = 1
     DrawSnake(main_snake.coordinates, main_snake.color, screen)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
