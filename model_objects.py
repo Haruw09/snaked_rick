@@ -68,6 +68,7 @@ class Snakes:
         for number in (1, len(self.coordinates) - 1, 1):
             self.coordinates[number] = self.coordinates[number - 1]
         return end
+
     def move_head(self, new_direction):
         '''
         Функция отвечает за движение головы змейки - поворот и продвижение

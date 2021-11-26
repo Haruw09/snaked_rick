@@ -1,6 +1,7 @@
 from model_objects import Wall, MainSnake, Food, Enemy
 from vis import DrawableWall, DrawableSnake
 
+
 def read_wall_data_from_file(input_filename):
     '''
 
@@ -18,7 +19,8 @@ def read_wall_data_from_file(input_filename):
             parse_wall_parameters(line, wall)
             objects.append(wall)
 
-    return(DrawableWall(obj) for obj in objects)
+    return (DrawableWall(obj) for obj in objects)
+
 
 def reed_main_snake_data_from_file(input_filename):
     '''
@@ -37,7 +39,8 @@ def reed_main_snake_data_from_file(input_filename):
             parse_main_snake_parameters(line, snake)
             objects.append(snake)
 
-    return(DrawableSnake(obj) for obj in objects)
+    return (DrawableSnake(obj) for obj in objects)
+
 
 def read_food_data_from_file(input_filename):
     '''
@@ -55,7 +58,8 @@ def read_food_data_from_file(input_filename):
             food = Food()
             parse_food_parameters(line, food)
             objects.append(food)
-    return(DrawableSnake(obj) for obj in objects)
+    return (DrawableSnake(obj) for obj in objects)
+
 
 def read_enemy_data_from_file(input_filename):
     '''
@@ -73,7 +77,8 @@ def read_enemy_data_from_file(input_filename):
             enemy = Enemy()
             parse_enemy_parameters(line, enemy)
             objects.append(enemy)
-    return(DrawableSnake(obj) for obj in objects)
+    return (DrawableSnake(obj) for obj in objects)
+
 
 def parse_wall_parameters(line, wall):
     '''
@@ -97,12 +102,13 @@ def parse_wall_parameters(line, wall):
     wall - объект стены
     '''
     tokens = line.split()
-    assert(len(tokens) == 5)
+    assert (len(tokens) == 5)
     wall.x_begin = int(tokens[0])
     wall.y_begin = int(tokens[1])
     wall.x_end = int(tokens[2])
     wall.y_end = int(tokens[3])
     wall.color = tokens[4]
+
 
 def parse_main_snake_parameters(line, snake):
     '''
@@ -126,10 +132,11 @@ def parse_main_snake_parameters(line, snake):
     snake - объект змеи
     '''
     tokens = line.split()
-    assert(len(tokens) == 3)
+    assert (len(tokens) == 3)
     snake.coordinates = tokens[0]
     snake.direction = tokens[1]
     snake.color = tokens[2]
+
 
 def parse_food_parameters(line, food):
     '''
@@ -153,11 +160,12 @@ def parse_food_parameters(line, food):
     food - объект змеи-еды
     '''
     tokens = line.split()
-    assert(len(tokens) == 4)
+    assert (len(tokens) == 4)
     food.coordinates = tokens[0]
     food.direction = tokens[1]
     food.color = tokens[2]
     food.actions = tokens[3]
+
 
 def parse_enemy_parameters(line, enemy):
     '''
@@ -181,7 +189,7 @@ def parse_enemy_parameters(line, enemy):
     enemy - объек змеи-врага
     '''
     tokens = line.split()
-    assert(len(tokens) == 3)
+    assert (len(tokens) == 3)
     enemy.coordinates = tokens[0]
     enemy.direction = tokens[1]
     enemy.color = tokens[2]
