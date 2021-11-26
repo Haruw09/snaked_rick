@@ -8,6 +8,9 @@ CYAN = 0x00FFCC
 BLACK = (0, 0, 0)
 WHITE = 0xFFFFFF
 GREY = 0x7D7D7D
+AQUAMARINE = (127, 255, 212)
+YELLOW_GREEN = (154, 205, 50)
+
 WIDTH = 41
 HEIGHT = 41
 
@@ -104,6 +107,7 @@ class MainSnake(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
         self.color = BLUE
+        self.head_color = AQUAMARINE
         self.death = 0
 
     def elongation(self, x_end, y_end):
@@ -114,6 +118,7 @@ class Food(Snakes):
     def __init__(self, coordinates, direction):
         Snakes.__init__(self, coordinates, direction)
         self.color = GREEN
+        self.head_color = YELLOW_GREEN
         self.actions = []  # Массив действий змейки-еды
 
     def eating(self, coordinates):

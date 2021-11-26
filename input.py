@@ -90,7 +90,7 @@ def read_food_data_from_file(input_filename):
                 cell.append(int(tokens[i+1]))
                 coordinates.append(cell)
 
-            snake = MainSnake(coordinates, direction)
+            snake = Food(coordinates, direction)
             foods.append(snake)
     return (foods)
 
@@ -118,7 +118,7 @@ def read_enemy_data_from_file(input_filename):
                 cell.append(int(tokens[i+1]))
                 coordinates.append(cell)
 
-            snake = MainSnake(coordinates, direction)
+            snake = Enemy(coordinates, direction)
             enemies.append(snake)
     return (enemies)
 

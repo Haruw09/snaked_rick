@@ -5,9 +5,10 @@ import model_objects as mo
 SIZE = 20
 
 
-def DrawSnake(coordinates, color, screen):
+def DrawSnake(coordinates, color, head_color, screen):
     for position in coordinates:
         pygame.draw.rect(screen, color, (position[0] * SIZE, position[1] * SIZE, SIZE, SIZE))
+    pygame.draw.rect(screen, head_color, (coordinates[0][0] * SIZE, coordinates[0][1] * SIZE, SIZE, SIZE))
 
 
 def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
