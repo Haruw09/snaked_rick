@@ -67,6 +67,4 @@ while not finished:
     main_snake.move_tail()
     main_snake.move_head(main_snake.direction)
 
-    print(main_snake.coordinates)
-
 pygame.quit()
