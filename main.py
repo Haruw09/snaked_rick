@@ -27,19 +27,19 @@ SIZE = 20
 def veer(event):
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_w]:
-        if main_snake.direction != 's':
+        if abs(main_snake.coordinates[0][1] - main_snake.coordinates[1][1]) != 1:
             main_snake.direction = 'w'
 
     if pressed[pygame.K_s]:
-        if main_snake.direction != 'w':
+        if abs(main_snake.coordinates[0][1] - main_snake.coordinates[1][1]) != 1:
             main_snake.direction = 's'
 
     if pressed[pygame.K_a]:
-        if main_snake.direction != 'd':
+        if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
             main_snake.direction = 'a'
 
     if pressed[pygame.K_d]:
-        if main_snake.direction != 'a':
+        if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
             main_snake.direction = 'd'
 
 #read_main_snake_data_from_file(main_snake.txt)
