@@ -42,7 +42,6 @@ def veer(event):
         if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
             main_snake.direction = 'd'
 
-#read_main_snake_data_from_file(main_snake.txt)
 
 screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
 
@@ -50,7 +49,7 @@ pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
 
-main_snake = MainSnake([[20, 20], [21, 20], [22, 20], [23, 20], [24, 20], [24, 21], [24, 22], [24, 23]], 's')
+main_snake = read_main_snake_data_from_file('main_snake.txt')
 draw_main_snake = DrawableSnake(main_snake)
 draw_main_snake.DrawSnake(screen)
 DrawField(screen)

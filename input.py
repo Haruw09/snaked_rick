@@ -9,7 +9,7 @@ def read_wall_data_from_file(input_filename):
 
     input_filename - имя считываемого файла
     '''
-    objects = []
+    walls = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
             if len(line.strip()) == 0 or line[0] == '#':
@@ -17,29 +17,40 @@ def read_wall_data_from_file(input_filename):
 
             wall = Wall()
             parse_wall_parameters(line, wall)
-            objects.append(wall)
+            walls.append(wall)
 
-    return (DrawableWall(obj) for obj in objects)
+    return (DrawableWall(obj) for obj in walls)
 
 
 def read_main_snake_data_from_file(input_filename):
     '''
 
-    Считывает данные о главной змеи из файла, создаёт её и вызывает создание её графического образа
+    Считывает данные о главной змее из файла
 
     input_filename - имя считываемого файла
+
+    Входные данные должны представлять из себя строку, состоящую из
+
+    <Координаты, введённые через пробел> <Ориентация головы змеи (w, a, s или d)> <Цвет змеи>
     '''
-    objects = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
             if len(line.strip()) == 0 or line[0] == '#':
                 continue
 
-            snake = MainSnake()
-            parse_main_snake_parameters(line, snake)
-            objects.append(snake)
+            tokens = line.split(' ')
+            color = tokens[-1]
+            direction = tokens[-2]
+            coordinates = []
+            for i in range(0, len(tokens) - 2, 2):
+                cell = []
+                cell.append(int(tokens[i]))
+                cell.append(int(tokens[i+1]))
+                coordinates.append(cell)
 
-    return (DrawableSnake(obj) for obj in objects)
+            snake = MainSnake(coordinates, direction)
+
+    return (snake)
 
 
 def read_food_data_from_file(input_filename):
@@ -49,7 +60,7 @@ def read_food_data_from_file(input_filename):
 
     input_filename - имя считываемого файла
     '''
-    objects = []
+    foods = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
             if len(line.strip()) == 0 or line[0] == '#':
@@ -57,8 +68,8 @@ def read_food_data_from_file(input_filename):
 
             food = Food()
             parse_food_parameters(line, food)
-            objects.append(food)
-    return (DrawableSnake(obj) for obj in objects)
+            foods.append(food)
+    return (DrawableSnake(obj) for obj in foods)
 
 
 def read_enemy_data_from_file(input_filename):
@@ -68,7 +79,7 @@ def read_enemy_data_from_file(input_filename):
 
     input_filename - имя считываемого файла
     '''
-    objects = []
+    enemies = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
             if len(line.strip()) == 0 or line[0] == '#':
@@ -76,8 +87,8 @@ def read_enemy_data_from_file(input_filename):
 
             enemy = Enemy()
             parse_enemy_parameters(line, enemy)
-            objects.append(enemy)
-    return (DrawableSnake(obj) for obj in objects)
+            enemies.append(enemy)
+    return (DrawableSnake(obj) for obj in enemies)
 
 
 def parse_wall_parameters(line, wall):
@@ -108,35 +119,6 @@ def parse_wall_parameters(line, wall):
     wall.x_end = int(tokens[2])
     wall.y_end = int(tokens[3])
     wall.color = tokens[4]
-
-
-def parse_main_snake_parameters(line, snake):
-    '''
-
-    Считывает данные о главной змее из строки
-
-    Входная строка должна иметь следующий вид:
-
-    <Массив координат змеи> <direction> <Цвет>
-
-    Где direction - направление движения змейки в данный момент, характеризуется одной из букв 'w', 'a', 's', 'd'
-
-    Пример строки (не знаю, как написать массив координат, но предположу):
-
-    [(20, 30), (20, 31), (20, 32), (21, 32), (22, 32), (23, 32)] a BLUE
-
-    Параметры:
-
-    line - строка с описанием файла
-
-    snake - объект змеи
-    '''
-    tokens = line.split()
-    assert (len(tokens) == 3)
-    snake.coordinates = tokens[0]
-    snake.direction = tokens[1]
-    snake.color = tokens[2]
-
 
 def parse_food_parameters(line, food):
     '''
