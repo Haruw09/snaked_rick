@@ -1,11 +1,20 @@
 from model_objects import Wall, MainSnake, Food, Enemy
-from vis import DrawableWall, DrawableSnake
 
 
 def read_wall_data_from_file(input_filename):
     '''
 
-    Считывает данные о стенах из файла, создаёт сами объекты и вызывает создание их графических образов
+    Считывает данные о стене из строки
+
+    Входная строка должна иметь следующий вид:
+
+    <x_begin> <y_begin> <x_end> <y_end> <Цвет>
+
+    Где (x_begin, y_begin) - координаты начала стены, (x_end, y_end) - координаты конца стены
+
+    Пример строки:
+
+    20 30 40 30 BLACK
 
     input_filename - имя считываемого файла
     '''
@@ -15,11 +24,16 @@ def read_wall_data_from_file(input_filename):
             if len(line.strip()) == 0 or line[0] == '#':
                 continue
 
-            wall = Wall()
-            parse_wall_parameters(line, wall)
+            tokens = line.split()
+            x_begin = int(tokens[0])
+            y_begin = int(tokens[1])
+            x_end = int(tokens[2])
+            y_end = int(tokens[3])
+            color = tokens[4]
+            wall = Wall(x_begin, y_begin, x_end, y_end)
             walls.append(wall)
 
-    return (DrawableWall(obj) for obj in walls)
+    return (walls)
 
 
 def read_main_snake_data_from_file(input_filename):
@@ -69,7 +83,7 @@ def read_food_data_from_file(input_filename):
             food = Food()
             parse_food_parameters(line, food)
             foods.append(food)
-    return (DrawableSnake(obj) for obj in foods)
+    return (foods)
 
 
 def read_enemy_data_from_file(input_filename):
@@ -88,7 +102,7 @@ def read_enemy_data_from_file(input_filename):
             enemy = Enemy()
             parse_enemy_parameters(line, enemy)
             enemies.append(enemy)
-    return (DrawableSnake(obj) for obj in enemies)
+    return (enemies)
 
 
 def parse_wall_parameters(line, wall):

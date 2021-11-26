@@ -1,6 +1,5 @@
 import pygame
 
-import main
 from input import *
 from model_objects import *
 from vis import *
@@ -19,8 +18,8 @@ BLACK = (0, 0, 0)
 WHITE = 0xFFFFFF
 GREY = 0x7D7D7D
 
-WIDTH = 40
-HEIGHT = 40
+WIDTH = 41
+HEIGHT = 41
 SIZE = 20
 
 
@@ -50,15 +49,20 @@ clock = pygame.time.Clock()
 finished = False
 
 main_snake = read_main_snake_data_from_file('main_snake.txt')
-draw_main_snake = DrawableSnake(main_snake)
-draw_main_snake.DrawSnake(screen)
+walls = read_wall_data_from_file('walls.txt')
+
+for wall in walls:
+    DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
+DrawSnake(main_snake.coordinates, main_snake.color, screen)
 DrawField(screen)
 
 while not finished:
     clock.tick(FPS)
     pygame.display.update()
-    screen.fill(BLACK)
-    draw_main_snake.DrawSnake(screen)
+    screen.fill(WHITE)
+    for wall in walls:
+        DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
+    DrawSnake(main_snake.coordinates, main_snake.color, screen)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             veer(event)
