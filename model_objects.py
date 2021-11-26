@@ -65,8 +65,9 @@ class Snakes:
 
     def move_tail(self):
         end = [self.coordinates[-1][0], self.coordinates[-1][1]]
-        for number in (1, len(self.coordinates) - 1, 1):
-            self.coordinates[number] = self.coordinates[number - 1]
+        length = len(self.coordinates)
+        for number in range(1, length, 1):
+            self.coordinates[length-number] = self.coordinates[length-number - 1]
         return end
 
     def move_head(self, new_direction):

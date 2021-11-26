@@ -22,7 +22,7 @@ def read_wall_data_from_file(input_filename):
     return (DrawableWall(obj) for obj in objects)
 
 
-def reed_main_snake_data_from_file(input_filename):
+def read_main_snake_data_from_file(input_filename):
     '''
 
     Считывает данные о главной змеи из файла, создаёт её и вызывает создание её графического образа
