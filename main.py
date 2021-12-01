@@ -6,7 +6,7 @@ from model_objects import *
 from vis import *
 import time
 
-FPS = 30
+FPS = 20
 
 # Цвета
 RED = 0xFF0000
@@ -84,6 +84,10 @@ while not finished and main_snake.death == 0:
             food_number += 1
         else:
             food_number = 0
+
+    if main_snake.collision(main_snake.coordinates) == 0:
+        main_snake.death = 1
+
 
     DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
 

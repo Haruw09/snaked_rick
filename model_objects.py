@@ -54,14 +54,14 @@ class Snakes:
         :param coordinates - массив координат квадратиков другой змейки
         :return: 0 - дополнительная змейка врезалась в данную, 1 - наоборот, 2 - ничего не произошло
         """
-        for position in self.coordinates:
-            x = position[0]
-            y = position[1]
+        for i in range(1, len(self.coordinates)):
+            x = self.coordinates[i][0]
+            y = self.coordinates[i][1]
             if x == coordinates[0][0] and y == coordinates[0][1]:
                 return 0
-        for position in coordinates:
-            x = position[0]
-            y = position[1]
+        for i in range(1, len(coordinates)):
+            x = coordinates[i][0]
+            y = coordinates[i][1]
             if x == self.coordinates[0][0] and y == self.coordinates[0][1]:
                 return 1
         return 2
