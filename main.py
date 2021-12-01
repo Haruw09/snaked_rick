@@ -7,6 +7,7 @@ from vis import *
 import time
 
 FPS = 30
+score = 0
 
 # Цвета
 RED = 0xFF0000
@@ -84,6 +85,7 @@ while not finished and main_snake.death == 0:
         x_end = main_snake.coordinates[l - 1][0]
         y_end = main_snake.coordinates[l - 1][0]
         main_snake.elongation(x_end, y_end)
+        score += 1
         food_number = randint(0, len(food) - 1)
 
     if main_snake.collision(main_snake.coordinates) == 0:
@@ -102,5 +104,14 @@ while not finished and main_snake.death == 0:
     if food[food_number].move_miss == food[food_number].miss:
         food[food_number].move_tail()
         food[food_number].move_head(food[food_number].direction)
+
+finished = False
+name =''
+
+while not finished and len(name) < 3:
+    End_game_display(screen, score, name)
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            name += Alphabet(event)
 
 pygame.quit()
