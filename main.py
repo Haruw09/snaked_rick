@@ -74,16 +74,17 @@ while not finished and main_snake.death == 0:
         if wall.collision(main_snake.coordinates[0][0], main_snake.coordinates[0][1]):
             main_snake.death = 1
 
+        food[food_number].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
+
+
     DrawSnake(food[food_number].coordinates, food[food_number].color, food[food_number].head_color, screen)
+
     if main_snake.collision(food[food_number].coordinates) == 1:
         l = len(main_snake.coordinates)
         x_end = main_snake.coordinates[l - 1][0]
         y_end = main_snake.coordinates[l - 1][0]
         main_snake.elongation(x_end, y_end)
-        if food_number < len(food) - 1:
-            food_number += 1
-        else:
-            food_number = 0
+        food_number = randint(0, len(food) - 1)
 
     if main_snake.collision(main_snake.coordinates) == 0:
         main_snake.death = 1
@@ -97,5 +98,9 @@ while not finished and main_snake.death == 0:
 
     main_snake.move_tail()
     main_snake.move_head(main_snake.direction)
+    food[food_number].move_miss = (food[food_number].move_miss + 1) % 2
+    if food[food_number].move_miss == food[food_number].miss:
+        food[food_number].move_tail()
+        food[food_number].move_head(food[food_number].direction)
 
 pygame.quit()

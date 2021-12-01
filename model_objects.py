@@ -120,6 +120,8 @@ class Food(Snakes):
         self.color = GREEN
         self.head_color = YELLOW_GREEN
         self.actions = []  # Массив действий змейки-еды
+        self.miss = 1
+        self.move_miss = 0
 
     def eating(self, coordinates):
         '''
@@ -134,6 +136,35 @@ class Food(Snakes):
     def death(self, coordinates):
         if self.collision(coordinates) == 1:
             self.live = False
+
+    def turn(self, x_begin, y_begin, x_end, y_end):
+        dir = self.direction
+        if dir == 'w':
+            x = self.coordinates[0][0]
+            y = self.coordinates[0][1] - 1
+        elif dir == 's':
+            x = self.coordinates[0][0]
+            y = self.coordinates[0][1] + 1
+        elif dir == 'a':
+            x = self.coordinates[0][0] - 1
+            y = self.coordinates[0][1]
+        else:
+            x = self.coordinates[0][0] + 1
+            y = self.coordinates[0][1]
+
+        if x_begin <= x <= x_end and y_begin <= y <= y_end:
+            if dir == 'w':
+                dir = 's'
+            elif dir == 's':
+                dir = 'w'
+            elif dir == 'a':
+                dir = 'd'
+            else:
+                dir = 'a'
+
+        self.direction = dir
+
+
 
 
 class Enemy(Snakes):
