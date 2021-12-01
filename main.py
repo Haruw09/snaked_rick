@@ -6,7 +6,7 @@ from model_objects import *
 from vis import *
 import time
 
-FPS = 20
+FPS = 30
 
 # Цвета
 RED = 0xFF0000
