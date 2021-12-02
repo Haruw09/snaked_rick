@@ -1,7 +1,8 @@
 import pygame
-
+import pygame.freetype
 import model_objects as mo
 
+pygame.freetype.init()
 SIZE = 20
 
 
@@ -19,16 +20,16 @@ def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
 def DrawField(screen):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
 
+
 def End_game_display(screen, score, name):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
-
-    myfont = pygame.font.SysFont('Comic Sans MS', 50)
-
-    text_letters = myfont.render("GAME OVER. YOU'R SCORE IS ", False, mo.BLACK)
+    my_font = pygame.freetype.Font('comic.ttf', 50)
+    text_letters, rect = my_font.render("GAME OVER. YOUR SCORE IS ", mo.BLACK)
     screen.blit(text_letters, (10, 10))
 
-    text_score = myfont.render(str(score), False, mo.RED)
+    text_score, rect = my_font.render(str(score), mo.RED)
     screen.blit(text_score, (10, 20))
+
 
 def Alphabet(event):
     pressed = pygame.key.get_pressed()
@@ -84,4 +85,3 @@ def Alphabet(event):
         return 'y'
     if pressed[pygame.K_z]:
         return 'z'
-
