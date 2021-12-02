@@ -123,6 +123,14 @@ def read_enemy_data_from_file(input_filename):
     return (enemies)
 
 def read_file(file_name):
+    '''
+
+    Считывает данные из файла с таблицей лидеров
+
+    file_name - имя считываемого файла
+
+    Возвращает двумерный массив, состоящий из пар [очки, имя игрока]
+    '''
     file = [] * 10
     inp = open(file_name, encoding = 'utf8')
     lines = inp.read().split('\n')
@@ -136,6 +144,22 @@ def read_file(file_name):
     return file
 
 def top_entry(score, changing_name):
+    '''
+
+    Функция проверяет, попал ли игрок в таблицу лидеров
+
+    Если попал, то вносит его результат и имя в список
+
+    Так же функция перезаписывает файл
+
+    score - счёт игрока
+
+    changing_name - имя игрока
+
+    Возвращает массив эллементов, где каждый каждый чётный элемент от 0 до 18 - очки, каждый нечётный от 1 до 19 имена
+
+    20 элемент - место текущего игрока в этой таблице (Если место больше 10, то в всегда будет отдавать 11)
+    '''
     file = read_file('top.txt')
     top = []
     names = []
@@ -170,5 +194,4 @@ def top_entry(score, changing_name):
     table.append(place)
     out.close()
 
-    print('Noted')
     return table

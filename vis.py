@@ -7,12 +7,34 @@ SIZE = 20
 
 
 def DrawSnake(coordinates, color, head_color, screen):
+    '''
+
+    Функция рисует змейку по квадратикам.
+
+    Сначала рисует кадратики по всем координатам змеи, а только потом голову
+
+    coordinates - массив координат змейки
+
+    color - цвет змейки
+
+    head_color - цвет головы змеи
+
+    screen - экран, на котором рисуется змейка
+    '''
     for position in coordinates:
         pygame.draw.rect(screen, color, (position[0] * SIZE, position[1] * SIZE, SIZE, SIZE))
     pygame.draw.rect(screen, head_color, (coordinates[0][0] * SIZE, coordinates[0][1] * SIZE, SIZE, SIZE))
 
 
 def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
+    '''
+
+    Функция рисует стену
+
+    x_begin, y_begin - координаты левого-верхнего квадратика стены
+
+    x_end, y_end - координаты правого-верхнего квадратика стены
+    '''
     pygame.draw.rect(screen, color,
                      (x_begin * SIZE, y_begin * SIZE, (x_end - x_begin + 1) * SIZE, (y_end - y_begin + 1) * SIZE))
 
@@ -22,6 +44,16 @@ def DrawField(screen):
 
 
 def End_game_display(screen, score, name):
+    '''
+
+    Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
+
+    screen - экран, на котором всё пишется
+
+    score - счёт игрока
+
+    name - имя игрока
+    '''
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
     my_font = pygame.freetype.Font('comic.ttf', 45)
 
@@ -41,6 +73,20 @@ def End_game_display(screen, score, name):
     screen.blit(text_press_right, (10, 130))
 
 def Draw_table(screen, table, place):
+    '''
+
+    Рисуем экран с таблицей лидеров
+
+    Так же на экране пишется, какое место в таблице занял игрок
+
+    Если игрок не занял никакого места, то пишем другую фразу
+
+    screen - экран
+
+    table - массив с очками и именами игроков
+
+    place - место игрока в этой таблице
+    '''
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
     my_font = pygame.freetype.Font('comic.ttf', 45)
 
@@ -73,6 +119,12 @@ def Draw_table(screen, table, place):
 
 
 def Alphabet(event):
+    '''
+
+    Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
+
+    Функция возвращает символ, соответсвующий нажатой клавише
+    '''
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_a]:
         return 'A'
