@@ -106,12 +106,32 @@ while not finished and main_snake.death == 0:
         food[food_number].move_head(food[food_number].direction)
 
 finished = False
-name =''
+right_pressed = False
+name = ''
 
-while not finished and len(name) < 3:
+while not finished and not right_pressed:
+    pygame.display.update()
+    screen.fill(WHITE)
     End_game_display(screen, score, name)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            name += Alphabet(event)
+            letter = Alphabet(event)
+            if letter == 'BACKSPACE':
+                name = name[:-1]
+            elif letter == 'RIGHT':
+                right_pressed = True
+            else:
+                name += letter
+
+table = top_entry(score, name)
+
+bottom_pressed = False
+while not finished and not bottom_pressed:
+    pygame.display.update()
+    screen.fill(WHITE)
+    Draw_table(screen, table, table[20])
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            bottom_pressed = True
 
 pygame.quit()

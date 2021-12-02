@@ -122,3 +122,53 @@ def read_enemy_data_from_file(input_filename):
             enemies.append(snake)
     return (enemies)
 
+def read_file(file_name):
+    file = [] * 10
+    inp = open(file_name, encoding = 'utf8')
+    lines = inp.read().split('\n')
+    for each_line in lines:
+        cell = []
+        tokens = each_line.split(' ')
+        cell.append(tokens[0])
+        cell.append(tokens[1])
+        file.append(cell)
+    inp.close()
+    return file
+
+def top_entry(score, changing_name):
+    file = read_file('top.txt')
+    top = []
+    names = []
+    place = 11
+    for i in range(10):
+        player_score = int(file[i][0])
+        top.append(player_score)
+        names.append(str(file[i][1]))
+
+    for i in range(10):
+        if score >= top[i]:
+            smth = score
+            score = top[i]
+            top[i] = smth
+
+            smbd = changing_name
+            changing_name = names[i]
+            names[i] = smbd
+            if place > i + 1:
+                place = i + 1
+
+    table = []
+    out = open('top.txt', 'w')
+    for i in range(9):
+        out.write(str(top[i]) + ' ' + str(names[i]) + '\n')
+        table.append(str(top[i]))
+        table.append(str(names[i]))
+
+    out.write(str(top[9]) + ' ' + str(names[9]))
+    table.append(str(top[9]))
+    table.append(str(names[9]))
+    table.append(place)
+    out.close()
+
+    print('Noted')
+    return table
