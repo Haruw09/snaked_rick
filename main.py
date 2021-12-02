@@ -6,7 +6,7 @@ from model_objects import *
 from vis import *
 import time
 
-FPS = 30
+FPS = 10
 score = 0
 
 # Цвета
@@ -100,7 +100,7 @@ while not finished and main_snake.death == 0:
 
     main_snake.move_tail()
     main_snake.move_head(main_snake.direction)
-    food[food_number].move_miss = (food[food_number].move_miss + 1) % 2
+    food[food_number].move_miss = (food[food_number].move_miss + 1) % (food[food_number].miss + 1)
     if food[food_number].move_miss == food[food_number].miss:
         food[food_number].move_tail()
         food[food_number].move_head(food[food_number].direction)
