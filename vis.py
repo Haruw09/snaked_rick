@@ -7,7 +7,7 @@ SIZE = 20
 
 
 def DrawSnake(coordinates, color, head_color, screen):
-    '''
+    """
 
     Функция рисует змейку по квадратикам.
 
@@ -20,21 +20,21 @@ def DrawSnake(coordinates, color, head_color, screen):
     head_color - цвет головы змеи
 
     screen - экран, на котором рисуется змейка
-    '''
+    """
     for position in coordinates:
         pygame.draw.rect(screen, color, (position[0] * SIZE, position[1] * SIZE, SIZE, SIZE))
     pygame.draw.rect(screen, head_color, (coordinates[0][0] * SIZE, coordinates[0][1] * SIZE, SIZE, SIZE))
 
 
 def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
-    '''
+    """
 
     Функция рисует стену
 
     x_begin, y_begin - координаты левого-верхнего квадратика стены
 
     x_end, y_end - координаты правого-верхнего квадратика стены
-    '''
+    """
     pygame.draw.rect(screen, color,
                      (x_begin * SIZE, y_begin * SIZE, (x_end - x_begin + 1) * SIZE, (y_end - y_begin + 1) * SIZE))
 
@@ -44,7 +44,7 @@ def DrawField(screen):
 
 
 def End_game_display(screen, score, name):
-    '''
+    """
 
     Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
 
@@ -53,7 +53,7 @@ def End_game_display(screen, score, name):
     score - счёт игрока
 
     name - имя игрока
-    '''
+    """
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
     my_font = pygame.freetype.Font('comic.ttf', 45)
 
@@ -74,7 +74,7 @@ def End_game_display(screen, score, name):
 
 
 def Draw_table(screen, table, place):
-    '''
+    """
 
     Рисуем экран с таблицей лидеров
 
@@ -87,7 +87,7 @@ def Draw_table(screen, table, place):
     table - массив с очками и именами игроков
 
     place - место игрока в этой таблице
-    '''
+    """
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
     my_font = pygame.freetype.Font('comic.ttf', 45)
 
@@ -95,7 +95,7 @@ def Draw_table(screen, table, place):
         text_congratulations, rect = my_font.render("CONGRATULATIONS!", mo.BLACK)
         screen.blit(text_congratulations, (10, 10))
 
-        text_your_place, rect = my_font.render("YOU'R PLACE IS ", mo.BLACK)
+        text_your_place, rect = my_font.render("YOUR PLACE IS ", mo.BLACK)
         screen.blit(text_your_place, (10, 60))
 
         text_place, rect = my_font.render(str(place), mo.BLACK)
@@ -119,12 +119,12 @@ def Draw_table(screen, table, place):
 
 
 def Alphabet(event):
-    '''
+    """
 
     Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
 
     Функция возвращает символ, соответсвующий нажатой клавише
-    '''
+    """
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_a]:
         return 'A'
