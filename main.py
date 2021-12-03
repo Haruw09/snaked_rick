@@ -68,6 +68,7 @@ def veer(event):
         if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
             main_snake.direction = 'd'
 
+
 '''
 
 Задаём параметры экрана
@@ -140,7 +141,6 @@ while not finished and main_snake.death == 0:
         Если да, то она развернётся
         '''
         food[food_number].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
-
 
     '''
     

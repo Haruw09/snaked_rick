@@ -59,7 +59,7 @@ def read_main_snake_data_from_file(input_filename):
             for i in range(0, len(tokens) - 2, 2):
                 cell = []
                 cell.append(int(tokens[i]))
-                cell.append(int(tokens[i+1]))
+                cell.append(int(tokens[i + 1]))
                 coordinates.append(cell)
 
             snake = MainSnake(coordinates, direction)
@@ -87,7 +87,7 @@ def read_food_data_from_file(input_filename):
             for i in range(0, len(tokens) - 2, 2):
                 cell = []
                 cell.append(int(tokens[i]))
-                cell.append(int(tokens[i+1]))
+                cell.append(int(tokens[i + 1]))
                 coordinates.append(cell)
 
             snake = Food(coordinates, direction)
@@ -115,12 +115,13 @@ def read_enemy_data_from_file(input_filename):
             for i in range(0, len(tokens) - 2, 2):
                 cell = []
                 cell.append(int(tokens[i]))
-                cell.append(int(tokens[i+1]))
+                cell.append(int(tokens[i + 1]))
                 coordinates.append(cell)
 
             snake = Enemy(coordinates, direction)
             enemies.append(snake)
     return (enemies)
+
 
 def read_file(file_name):
     '''
@@ -132,7 +133,7 @@ def read_file(file_name):
     Возвращает двумерный массив, состоящий из пар [очки, имя игрока]
     '''
     file = [] * 10
-    inp = open(file_name, encoding = 'utf8')
+    inp = open(file_name, encoding='utf8')
     lines = inp.read().split('\n')
     for each_line in lines:
         cell = []
@@ -142,6 +143,7 @@ def read_file(file_name):
         file.append(cell)
     inp.close()
     return file
+
 
 def top_entry(score, changing_name):
     '''

@@ -72,6 +72,7 @@ def End_game_display(screen, score, name):
     text_press_right, rect = my_font.render('PRESS --> TO CONTINUE', mo.BLACK)
     screen.blit(text_press_right, (10, 130))
 
+
 def Draw_table(screen, table, place):
     '''
 
@@ -113,9 +114,8 @@ def Draw_table(screen, table, place):
         text_name, rect = my_font.render(str(table[2 * i + 1]), mo.BLACK)
         screen.blit(text_name, (150, 150 + i * 50))
 
-    text_press_any_key,  rect = my_font.render("PRESS ANY KEY TO EXIT", mo.BLACK)
+    text_press_any_key, rect = my_font.render("PRESS ANY KEY TO EXIT", mo.BLACK)
     screen.blit(text_press_any_key, (10, 750))
-
 
 
 def Alphabet(event):
@@ -202,4 +202,3 @@ def Alphabet(event):
         return 'BACKSPACE'
     if pressed[pygame.K_RIGHT]:
         return 'RIGHT'
-
