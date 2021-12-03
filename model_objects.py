@@ -1,3 +1,4 @@
+import pygame
 # Цвета
 RED = 0xFF0000
 BLUE = 0x0000FF
@@ -112,6 +113,36 @@ class MainSnake(Snakes):
 
     def elongation(self, x_end, y_end):
         self.coordinates.append([x_end, y_end])
+
+    def veer(self):
+        '''
+
+        Эту функцию стоит добавить в класс главной змейки
+
+        Функция поворачивает голову змеи, в зависимости от нажатой клавиши.
+
+        Змея не повернёт в противоположную сторону.
+
+        На вход функция получает ивент
+
+        В результате функция отдаёт новое значение ориентации головы змеи
+        '''
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_w]:
+            if abs(self.coordinates[0][1] - self.coordinates[1][1]) != 1:
+                self.direction = 'w'
+
+        if pressed[pygame.K_s]:
+            if abs(self.coordinates[0][1] - self.coordinates[1][1]) != 1:
+                self.direction = 's'
+
+        if pressed[pygame.K_a]:
+            if abs(self.coordinates[0][0] - self.coordinates[1][0]) != 1:
+                self.direction = 'a'
+
+        if pressed[pygame.K_d]:
+            if abs(self.coordinates[0][0] - self.coordinates[1][0]) != 1:
+                self.direction = 'd'
 
 
 class Food(Snakes):

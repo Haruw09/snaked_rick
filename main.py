@@ -10,7 +10,7 @@ import time
 
 Параметры игры (ФПС - влияет на скорость игры, начальное кол-во очков (Почти всегда это 0))
 '''
-FPS = 10
+FPS = 30
 score = 0
 
 '''
@@ -36,38 +36,6 @@ YELLOW_GREEN = (154, 205, 50)
 WIDTH = 41
 HEIGHT = 41
 SIZE = 20
-
-
-def veer(event):
-    '''
-
-    Эту функцию стоит добавить в класс главной змейки
-
-    Функция поворачивает голову змеи, в зависимости от нажатой клавиши.
-
-    Змея не повернёт в противоположную сторону.
-
-    На вход функция получает ивент
-
-    В результате функция отдаёт новое значение ориентации головы змеи
-    '''
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_w]:
-        if abs(main_snake.coordinates[0][1] - main_snake.coordinates[1][1]) != 1:
-            main_snake.direction = 'w'
-
-    if pressed[pygame.K_s]:
-        if abs(main_snake.coordinates[0][1] - main_snake.coordinates[1][1]) != 1:
-            main_snake.direction = 's'
-
-    if pressed[pygame.K_a]:
-        if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
-            main_snake.direction = 'a'
-
-    if pressed[pygame.K_d]:
-        if abs(main_snake.coordinates[0][0] - main_snake.coordinates[1][0]) != 1:
-            main_snake.direction = 'd'
-
 
 '''
 
@@ -185,7 +153,7 @@ while not finished and main_snake.death == 0:
     '''
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            veer(event)
+            main_snake.veer()
 
     '''
     
