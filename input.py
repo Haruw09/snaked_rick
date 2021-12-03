@@ -2,7 +2,7 @@ from model_objects import Wall, MainSnake, Food, Enemy
 
 
 def read_wall_data_from_file(input_filename):
-    '''
+    """
 
     Считывает данные о стене из строки
 
@@ -17,7 +17,7 @@ def read_wall_data_from_file(input_filename):
     20 30 40 30 BLACK
 
     input_filename - имя считываемого файла
-    '''
+    """
     walls = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
@@ -37,7 +37,7 @@ def read_wall_data_from_file(input_filename):
 
 
 def read_main_snake_data_from_file(input_filename):
-    '''
+    """
 
     Считывает данные о главной змее из файла
 
@@ -46,7 +46,7 @@ def read_main_snake_data_from_file(input_filename):
     Входные данные должны представлять из себя строку, состоящую из
 
     <Координаты, введённые через пробел> <Ориентация головы змеи (w, a, s или d)> <Цвет змеи>
-    '''
+    """
     with open(input_filename, 'r') as input_file:
         for line in input_file:
             if len(line.strip()) == 0 or line[0] == '#':
@@ -68,12 +68,12 @@ def read_main_snake_data_from_file(input_filename):
 
 
 def read_food_data_from_file(input_filename):
-    '''
+    """
 
     Считывает данные о змеях-еде из файла, создаёт сами объекты и вызывает создание их графических образов
 
     input_filename - имя считываемого файла
-    '''
+    """
     foods = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
@@ -96,12 +96,12 @@ def read_food_data_from_file(input_filename):
 
 
 def read_enemy_data_from_file(input_filename):
-    '''
+    """
 
     Считывает данные о змеях-врагах из файла, создаёт сами объекты и вызывает создание их графических образов
 
     input_filename - имя считываемого файла
-    '''
+    """
     enemies = []
     with open(input_filename, 'r') as input_file:
         for line in input_file:
@@ -124,14 +124,14 @@ def read_enemy_data_from_file(input_filename):
 
 
 def read_file(file_name):
-    '''
+    """
 
     Считывает данные из файла с таблицей лидеров
 
     file_name - имя считываемого файла
 
     Возвращает двумерный массив, состоящий из пар [очки, имя игрока]
-    '''
+    """
     file = [] * 10
     inp = open(file_name, encoding='utf8')
     lines = inp.read().split('\n')
@@ -146,7 +146,7 @@ def read_file(file_name):
 
 
 def top_entry(score, changing_name):
-    '''
+    """
 
     Функция проверяет, попал ли игрок в таблицу лидеров
 
@@ -161,7 +161,7 @@ def top_entry(score, changing_name):
     Возвращает массив эллементов, где каждый каждый чётный элемент от 0 до 18 - очки, каждый нечётный от 1 до 19 имена
 
     20 элемент - место текущего игрока в этой таблице (Если место больше 10, то в всегда будет отдавать 11)
-    '''
+    """
     file = read_file('top.txt')
     top = []
     names = []
