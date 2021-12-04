@@ -43,14 +43,32 @@ SIZE = 20
 '''
 screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
 
+
+def StartDisplay(event, size):
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
+            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
+                return 1
+            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
+                return 2
+            elif size * 5 / 7 * mo.WIDTH <= event.pos[0] <= size * 6 / 7 * mo.WIDTH:
+                return 3
+    return 0
+
+
 pygame.display.update()
 clock = pygame.time.Clock()
+screen_number = 1
 finished = False
 result = 0
+#while not finished:
+    #if screen_number == 1:
+
 while not finished and result == 0:
     pygame.display.update()
     for event in pygame.event.get():
-        result = StartDisplay(screen, event, SIZE)
+        DrawStartDisplay(screen, event, SIZE)
+        result = StartDisplay(event, SIZE)
 '''
 
 Считываем файлы с параметрами змейки, стен и змеек - еды

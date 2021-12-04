@@ -73,9 +73,9 @@ def End_game_display(screen, score, name):
     screen.blit(text_press_right, (10, 130))
 
 
-def StartDisplay(screen, event, size):
+def DrawStartDisplay(screen, event, size):
     screen.fill(mo.WHITE)
-    head_font = pygame.freetype.Font("COOPBL.TTF", 50)
+    head_font = pygame.freetype.Font("COOPBL.TTF", 60)
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
     screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 10))
     pygame.draw.rect(screen, mo.AQUAMARINE,
@@ -84,6 +84,8 @@ def StartDisplay(screen, event, size):
                      (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70, size * mo.HEIGHT / 8))
     pygame.draw.rect(screen, mo.RED,
                      (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+    pygame.draw.rect(screen, mo.MAGENTA, (size * mo.WIDTH / 7, 6 * size * mo.HEIGHT / 7, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+
     my_font = pygame.freetype.Font('comic.ttf', 40)
     easy, rect, = my_font.render("EASY", mo.BLACK)
     screen.blit(easy, (size * 105 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
@@ -94,6 +96,8 @@ def StartDisplay(screen, event, size):
     text_font = pygame.freetype.Font('comic.ttf', 50)
     text, rect = text_font.render("Choose your difficulty level")
     screen.blit(text, (size * 8 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
+    description, rect = my_font.render("Eat all the Morties or they'll eat you")
+    screen.blit(description, (size * 8 * mo.WIDTH / 70, 3 * size * mo.HEIGHT / 15))
     if event.type == pygame.MOUSEMOTION:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
             if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
@@ -108,15 +112,6 @@ def StartDisplay(screen, event, size):
                 pygame.draw.rect(screen, mo.BLACK,
                                  (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7,
                                   size * mo.HEIGHT / 8), 2)
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
-            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
-                return 1
-            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
-                return 2
-            elif size * 5/7 * mo.WIDTH <= event.pos[0] <= size * 6/7 * mo.WIDTH:
-                return 3
-    return 0
 
 def Draw_table(screen, table, place):
     """
