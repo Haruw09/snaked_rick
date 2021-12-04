@@ -202,3 +202,4 @@ def Alphabet(event):
         return 'BACKSPACE'
     if pressed[pygame.K_RIGHT]:
         return 'RIGHT'
+    return ''
