@@ -29,6 +29,8 @@ GREY = 0x7D7D7D
 AQUAMARINE = (127, 255, 212)
 YELLOW_GREEN = (154, 205, 50)
 
+
+
 '''
 
 Параметры экрана (Ширина, Высота и масштаб, т.е. кол-во пикселей в одном игровом квадратике)
@@ -69,6 +71,13 @@ while not finished and result == 0:
     for event in pygame.event.get():
         DrawStartDisplay(screen, event, SIZE)
         result = StartDisplay(event, SIZE)
+result = 0
+while not finished and result == 0:
+    pygame.display.update()
+    for event in pygame.event.get():
+        DrawChoiceDisplay(screen, event, SIZE)
+        #result = ChoiceDisplay(event, SIZE)
+
 '''
 
 Считываем файлы с параметрами змейки, стен и змеек - еды
