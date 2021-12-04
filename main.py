@@ -29,8 +29,6 @@ GREY = 0x7D7D7D
 AQUAMARINE = (127, 255, 212)
 YELLOW_GREEN = (154, 205, 50)
 
-
-
 '''
 
 Параметры экрана (Ширина, Высота и масштаб, т.е. кол-во пикселей в одном игровом квадратике)
@@ -58,6 +56,18 @@ def StartDisplay(event, size):
     return 0
 
 
+def ChoiceDisplay(event, size):
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if size / 3 * mo.WIDTH <= event.pos[0] <= 2 * size / 3 * mo.WIDTH:
+            if size * mo.HEIGHT / 7 <= event.pos[1] <= 2 * size * mo.HEIGHT / 7:
+                return 1
+            elif 3 * size * mo.HEIGHT / 7 <= event.pos[1] <= 4 * size * mo.HEIGHT / 7:
+                return 2
+            elif 5 * size * mo.HEIGHT / 7 <= event.pos[1] <= 6 * size * mo.HEIGHT / 7:
+                return 3
+    return 0
+
+
 pygame.display.update()
 clock = pygame.time.Clock()
 screen_number = 1
@@ -76,7 +86,7 @@ while not finished and result == 0:
     pygame.display.update()
     for event in pygame.event.get():
         DrawChoiceDisplay(screen, event, SIZE)
-        #result = ChoiceDisplay(event, SIZE)
+        result = ChoiceDisplay(event, SIZE)
 
 '''
 

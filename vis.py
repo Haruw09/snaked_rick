@@ -156,7 +156,6 @@ def DrawChoiceDisplay(screen, event, size):
     pygame.draw.rect(screen, mo.ORANGE,
                      (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
 
-
 def Draw_table(screen, table, place):
     """
 
