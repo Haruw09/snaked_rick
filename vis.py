@@ -118,7 +118,7 @@ def Draw_table(screen, table, place):
     screen.blit(text_press_any_key, (10, 750))
 
 
-def Alphabet(event):
+def Alphabet():
     """
 
     Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
