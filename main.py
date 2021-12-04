@@ -46,7 +46,11 @@ screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
-
+bottom_pressed = False
+while not finished and bottom_pressed == False:
+    pygame.display.update()
+    for event in pygame.event.get():
+        StartDisplay(screen, event, SIZE)
 '''
 
 Считываем файлы с параметрами змейки, стен и змеек - еды
@@ -74,6 +78,7 @@ DrawField(screen)
 
 Тут мы начинаем гонять нашу игру, пока змея не врежится в стену или не укусит сама себя
 '''
+
 while not finished and main_snake.death == 0:
     clock.tick(FPS)
     '''

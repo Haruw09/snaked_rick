@@ -73,6 +73,25 @@ def End_game_display(screen, score, name):
     screen.blit(text_press_right, (10, 130))
 
 
+def StartDisplay(screen, event, size):
+    screen.fill(mo.WHITE)
+
+    pygame.draw.rect(screen, mo.WHITE, (0, 0, size * mo.WIDTH, size * mo.HEIGHT))
+    pygame.draw.rect(screen, mo.AQUAMARINE,
+                     (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+    pygame.draw.rect(screen, mo.YELLOW,
+                     (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70, size * mo.HEIGHT / 8))
+    pygame.draw.rect(screen, mo.RED,
+                     (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+    my_font = pygame.freetype.Font('comic.ttf', 40)
+    easy, rect, = my_font.render("EASY", mo.BLACK)
+    screen.blit(easy, (size * 105 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    medium, rect = my_font.render("MEDIUM", mo.BLACK)
+    screen.blit(medium, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    hard, rect = my_font.render("HARD", mo.BLACK)
+    screen.blit(hard, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+
+
 def Draw_table(screen, table, place):
     """
 
