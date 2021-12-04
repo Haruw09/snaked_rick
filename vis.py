@@ -91,6 +91,9 @@ def StartDisplay(screen, event, size):
     screen.blit(medium, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     hard, rect = my_font.render("HARD", mo.BLACK)
     screen.blit(hard, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    text_font = pygame.freetype.Font('comic.ttf', 50)
+    text, rect = text_font.render("Choose your difficulty level")
+    screen.blit(text, (size * 8 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
     if event.type == pygame.MOUSEMOTION:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
             if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
@@ -106,7 +109,13 @@ def StartDisplay(screen, event, size):
                                  (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7,
                                   size * mo.HEIGHT / 8), 2)
     if event.type == pygame.MOUSEBUTTONDOWN:
-        return 1
+        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
+            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
+                return 1
+            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
+                return 2
+            elif size * 5/7 * mo.WIDTH <= event.pos[0] <= size * 6/7 * mo.WIDTH:
+                return 3
     return 0
 
 def Draw_table(screen, table, place):
