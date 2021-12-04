@@ -75,8 +75,9 @@ def End_game_display(screen, score, name):
 
 def StartDisplay(screen, event, size):
     screen.fill(mo.WHITE)
-
-    pygame.draw.rect(screen, mo.WHITE, (0, 0, size * mo.WIDTH, size * mo.HEIGHT))
+    head_font = pygame.freetype.Font("COOPBL.TTF", 50)
+    head, rect = head_font.render("Snaked Rick", mo.BLACK)
+    screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 10))
     pygame.draw.rect(screen, mo.AQUAMARINE,
                      (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
     pygame.draw.rect(screen, mo.YELLOW,
@@ -90,7 +91,23 @@ def StartDisplay(screen, event, size):
     screen.blit(medium, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     hard, rect = my_font.render("HARD", mo.BLACK)
     screen.blit(hard, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-
+    if event.type == pygame.MOUSEMOTION:
+        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
+            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8),
+                                 2)
+            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70,
+                                  size * mo.HEIGHT / 8), 2)
+            elif size * 5/7 * mo.WIDTH <= event.pos[0] <= size * 6/7 * mo.WIDTH:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7,
+                                  size * mo.HEIGHT / 8), 2)
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        return 1
+    return 0
 
 def Draw_table(screen, table, place):
     """
