@@ -84,7 +84,12 @@ def DrawStartDisplay(screen, event, size):
                      (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70, size * mo.HEIGHT / 8))
     pygame.draw.rect(screen, mo.RED,
                      (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
-    pygame.draw.rect(screen, mo.MAGENTA, (size * mo.WIDTH / 7, 6 * size * mo.HEIGHT / 7, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+    pygame.draw.circle(screen, mo.YELLOW_GREEN, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                       size * mo.HEIGHT / 10)
+    pygame.draw.circle(screen, mo.YELLOW_GREEN, (35 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                       size * mo.HEIGHT / 10)
+    pygame.draw.circle(screen, mo.YELLOW_GREEN, (55 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                       size * mo.HEIGHT / 10)
 
     my_font = pygame.freetype.Font('comic.ttf', 40)
     easy, rect, = my_font.render("EASY", mo.BLACK)
@@ -92,12 +97,28 @@ def DrawStartDisplay(screen, event, size):
     medium, rect = my_font.render("MEDIUM", mo.BLACK)
     screen.blit(medium, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     hard, rect = my_font.render("HARD", mo.BLACK)
+    my_font = pygame.freetype.Font('comic.ttf', 35)
     screen.blit(hard, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    table, rect = my_font.render("Table of")
+    screen.blit(table, (size * 95 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
+    screen.blit(table, (size * 295 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
+    screen.blit(table, (size * 495 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
+    table, rect = my_font.render("LEVEL 1")
+    screen.blit(table, (size * 95 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
+    table, rect = my_font.render("LEVEL 2")
+    screen.blit(table, (size * 295 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
+    table, rect = my_font.render("LEVEL 3")
+    screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
+
     text_font = pygame.freetype.Font('comic.ttf', 50)
     text, rect = text_font.render("Choose your difficulty level")
     screen.blit(text, (size * 8 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
-    description, rect = my_font.render("Eat all the Morties or they'll eat you")
-    screen.blit(description, (size * 8 * mo.WIDTH / 70, 3 * size * mo.HEIGHT / 15))
+    text, rect = text_font.render("Table of results")
+    screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
+    description, rect = text_font.render("Eat all the Morties")
+    screen.blit(description, (size * 18 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 6))
+    description, rect = text_font.render("or they'll eat you")
+    screen.blit(description, (size * 18 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 4))
     if event.type == pygame.MOUSEMOTION:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
             if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
@@ -108,10 +129,23 @@ def DrawStartDisplay(screen, event, size):
                 pygame.draw.rect(screen, mo.BLACK,
                                  (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70,
                                   size * mo.HEIGHT / 8), 2)
-            elif size * 5/7 * mo.WIDTH <= event.pos[0] <= size * 6/7 * mo.WIDTH:
+            elif size * 5 / 7 * mo.WIDTH <= event.pos[0] <= size * 6 / 7 * mo.WIDTH:
                 pygame.draw.rect(screen, mo.BLACK,
                                  (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7,
                                   size * mo.HEIGHT / 8), 2)
+        if (event.pos[0] - size * 15 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
+                size * mo.HEIGHT / 10) ** 2:
+            pygame.draw.circle(screen, mo.BLACK, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                               size * mo.HEIGHT / 10, 2)
+        elif (event.pos[0] - size * 35 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
+                size * mo.HEIGHT / 10) ** 2:
+            pygame.draw.circle(screen, mo.BLACK, (35 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                               size * mo.HEIGHT / 10, 2)
+        elif (event.pos[0] - size * 55 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
+                size * mo.HEIGHT / 10) ** 2:
+            pygame.draw.circle(screen, mo.BLACK, (55 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                               size * mo.HEIGHT / 10, 2)
+
 
 def Draw_table(screen, table, place):
     """

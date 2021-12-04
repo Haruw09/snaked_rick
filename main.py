@@ -61,8 +61,8 @@ clock = pygame.time.Clock()
 screen_number = 1
 finished = False
 result = 0
-#while not finished:
-    #if screen_number == 1:
+# while not finished:
+# if screen_number == 1:
 
 while not finished and result == 0:
     pygame.display.update()
