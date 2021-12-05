@@ -111,7 +111,7 @@ def DrawStartDisplay(screen, event, size):
     screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
 
     text_font = pygame.freetype.Font('comic.ttf', 50)
-    text, rect = text_font.render("Choose your difficulty level")
+    text, rect = text_font.render("Choose your difficulty level!")
     screen.blit(text, (size * 8 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
     text, rect = text_font.render("Table of results")
     screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
@@ -185,6 +185,21 @@ def DrawChoiceDisplay(screen, event, size):
                                                     rick_surf.get_height() // 5)))
     rick_rect = rick_surf.get_rect(bottomright=(size * 3 * mo.WIDTH / 10, 45 * size * mo.HEIGHT / 80))
     screen.blit(rick_surf, rick_rect)
+    if event.type == pygame.MOUSEMOTION:
+        if size * mo.WIDTH / 3 <= event.pos[0] <= 2 * size * mo.WIDTH / 3:
+            if size * mo.HEIGHT / 7 <= event.pos[1] <= 2 * size * mo.HEIGHT / 7:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
+                                 2)
+            elif 3 * size * mo.HEIGHT / 7 <= event.pos[1] <= 4 * size * mo.HEIGHT / 7:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
+                                 2)
+            elif 5 * size * mo.HEIGHT / 7 <= event.pos[1] <= 6 * size * mo.HEIGHT / 7:
+                pygame.draw.rect(screen, mo.BLACK,
+                                 (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
+                                 2)
+
 
 
 def Draw_table(screen, table, place):
