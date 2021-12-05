@@ -162,7 +162,19 @@ def DrawChoiceDisplay(screen, event, size):
     screen.blit(level, (size * 24 * mo.WIDTH / 60, 33 * size * mo.HEIGHT / 70))
     level, rect = my_font.render("LEVEL 3", mo.BLACK)
     screen.blit(level, (size * 24 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
-
+    text_font = pygame.freetype.Font('comic.ttf', 50)
+    text_level, rect = text_font.render("Choose you level!")
+    screen.blit(text_level, (size * 16 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
+    rick_surf = pygame.image.load('Rick1.png')
+    rick_surf = pygame.transform.scale(rick_surf, ((2 * rick_surf.get_width() // 5,
+                                                    2 * rick_surf.get_height() // 5)))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 79 * mo.WIDTH / 80, 13 * size * mo.HEIGHT / 30))
+    screen.blit(rick_surf, rick_rect)
+    rick_surf = pygame.image.load('pickle_rick.png')
+    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() // 4,
+                                                    rick_surf.get_height() // 4)))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 4 * mo.WIDTH / 10, 79 * size * mo.HEIGHT / 80))
+    screen.blit(rick_surf, rick_rect)
 
 
 def Draw_table(screen, table, place):
