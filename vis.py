@@ -77,7 +77,7 @@ def DrawStartDisplay(screen, event, size):
     screen.fill(mo.WHITE)
     head_font = pygame.freetype.Font("COOPBL.TTF", 60)
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
-    screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 10))
+    screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 20))
     pygame.draw.rect(screen, mo.AQUAMARINE,
                      (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
     pygame.draw.rect(screen, mo.YELLOW,
@@ -116,9 +116,9 @@ def DrawStartDisplay(screen, event, size):
     text, rect = text_font.render("Table of results")
     screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
     description, rect = text_font.render("Eat all the Morties")
-    screen.blit(description, (size * 18 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 6))
+    screen.blit(description, (size * 18 * mo.WIDTH / 70, 8 * size * mo.HEIGHT / 60))
     description, rect = text_font.render("or they'll eat you")
-    screen.blit(description, (size * 18 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 4))
+    screen.blit(description, (size * 20 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 5))
     if event.type == pygame.MOUSEMOTION:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
             if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
@@ -155,6 +155,15 @@ def DrawChoiceDisplay(screen, event, size):
                      (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
     pygame.draw.rect(screen, mo.ORANGE,
                      (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
+    my_font = pygame.freetype.Font('comic.ttf', 45)
+    level, rect = my_font.render("LEVEL 1", mo.BLACK)
+    screen.blit(level, (size * 24 * mo.WIDTH / 60, 13 * size * mo.HEIGHT / 70))
+    level, rect = my_font.render("LEVEL 2", mo.BLACK)
+    screen.blit(level, (size * 24 * mo.WIDTH / 60, 33 * size * mo.HEIGHT / 70))
+    level, rect = my_font.render("LEVEL 3", mo.BLACK)
+    screen.blit(level, (size * 24 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
+
+
 
 def Draw_table(screen, table, place):
     """
