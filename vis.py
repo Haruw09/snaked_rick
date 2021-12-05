@@ -175,6 +175,16 @@ def DrawChoiceDisplay(screen, event, size):
                                                     rick_surf.get_height() // 4)))
     rick_rect = rick_surf.get_rect(bottomright=(size * 4 * mo.WIDTH / 10, 79 * size * mo.HEIGHT / 80))
     screen.blit(rick_surf, rick_rect)
+    rick_surf = pygame.image.load('portal.png')
+    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() // 2,
+                                                    rick_surf.get_height() // 2)))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 9 * mo.WIDTH / 10, 70 * size * mo.HEIGHT / 80))
+    screen.blit(rick_surf, rick_rect)
+    rick_surf = pygame.image.load('rim.png')
+    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() // 5,
+                                                    rick_surf.get_height() // 5)))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 3 * mo.WIDTH / 10, 45 * size * mo.HEIGHT / 80))
+    screen.blit(rick_surf, rick_rect)
 
 
 def Draw_table(screen, table, place):
