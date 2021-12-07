@@ -94,7 +94,7 @@ while not finished and result == 0:
 Считываем файлы с параметрами змейки, стен и змеек - еды
 '''
 main_snake = read_main_snake_data_from_file('main_snake.txt')
-walls = read_wall_data_from_file('walls.txt')
+walls = read_wall_data_from_file('Lvl_3.txt')
 food = read_food_data_from_file('food.txt')
 
 '''
@@ -108,7 +108,18 @@ for wall in walls:
 
 live_food = [0] * number_of_food
 for num in range(number_of_food):
-    live_food[num] = randint(0, len(food) - 1)
+    flag = 0
+    while flag == 0:
+        live_food[num] = randint(0, len(food) - 1)
+        x = food[live_food[num]].coordinates[0][0]
+        y = food[live_food[num]].coordinates[0][1]
+        for wall in walls:
+            if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
+                flag = 1
+        for another_num in range(num):
+            if live_food[another_num] == live_food[num]:
+                flag = 0
+
     DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
 DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
@@ -177,7 +188,18 @@ while not finished and main_snake.death == 0:
             y_end = main_snake.coordinates[l - 1][0]
             main_snake.elongation(x_end, y_end)
             score += 1
-            live_food[num] = randint(0, len(food) - 1)
+
+            flag = 0
+            while flag == 0:
+                live_food[num] = randint(0, len(food) - 1)
+                x = food[live_food[num]].coordinates[0][0]
+                y = food[live_food[num]].coordinates[0][1]
+                for wall in walls:
+                    if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
+                        flag = 1
+                for another_num in range(num):
+                    if live_food[another_num] == live_food[num]:
+                        flag = 0
 
     '''
     
