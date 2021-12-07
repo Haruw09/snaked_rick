@@ -12,6 +12,7 @@ import time
 '''
 FPS = 30
 score = 0
+number_of_food = 3
 
 '''
 
@@ -105,8 +106,10 @@ food = read_food_data_from_file('food.txt')
 for wall in walls:
     DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
 
-food_number = randint(0, len(food) - 1)
-DrawSnake(food[food_number].coordinates, food[food_number].color, food[food_number].head_color, screen)
+live_food = [0] * number_of_food
+for num in range(number_of_food):
+    live_food[num] = randint(0, len(food) - 1)
+    DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
 DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
 DrawField(screen)
@@ -150,13 +153,15 @@ while not finished and main_snake.death == 0:
         
         Если да, то она развернётся
         '''
-        food[food_number].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
+        for num in live_food:
+            food[num].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
 
     '''
     
     Рисуем змейку-еду
     '''
-    DrawSnake(food[food_number].coordinates, food[food_number].color, food[food_number].head_color, screen)
+    for num in live_food:
+        DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
     '''
     
@@ -164,13 +169,15 @@ while not finished and main_snake.death == 0:
     
     Если да, то создаётся новая еда, а змейка вырастает на одну ячейку
     '''
-    if main_snake.collision(food[food_number].coordinates) == 1:
-        l = len(main_snake.coordinates)
-        x_end = main_snake.coordinates[l - 1][0]
-        y_end = main_snake.coordinates[l - 1][0]
-        main_snake.elongation(x_end, y_end)
-        score += 1
-        food_number = randint(0, len(food) - 1)
+    for num in range(number_of_food):
+        food_number = live_food[num]
+        if main_snake.collision(food[food_number].coordinates) == 1:
+            l = len(main_snake.coordinates)
+            x_end = main_snake.coordinates[l - 1][0]
+            y_end = main_snake.coordinates[l - 1][0]
+            main_snake.elongation(x_end, y_end)
+            score += 1
+            live_food[num] = randint(0, len(food) - 1)
 
     '''
     
@@ -212,10 +219,11 @@ while not finished and main_snake.death == 0:
     
     Еда двигается на клетку каждый 2 ход (food[food_number].miss + 1)
     '''
-    food[food_number].move_miss = (food[food_number].move_miss + 1) % (food[food_number].miss + 1)
-    if food[food_number].move_miss == food[food_number].miss:
-        food[food_number].move_tail()
-        food[food_number].move_head(food[food_number].direction)
+    for num in live_food:
+        food[num].move_miss = (food[num].move_miss + 1) % (food[num].miss + 1)
+        if food[num].move_miss == food[num].miss:
+            food[num].move_tail()
+            food[num].move_head(food[num].direction)
 
 '''
 
