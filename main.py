@@ -96,11 +96,11 @@ while not finished and result == 0:
         result = StartDisplay(event, SIZE)
 
 if result == 1:
-    FPS = 10
+    walls = read_wall_data_from_file('Lvl_1.txt')
 elif result == 2:
-    FPS = 20
+    walls = read_wall_data_from_file('Lvl_2.txt')
 elif result == 3:
-    FPS = 30
+    walls = read_wall_data_from_file('Lvl_3.txt')
 
 result = 0
 while not finished and result == 0:
@@ -110,11 +110,12 @@ while not finished and result == 0:
         result = ChoiceDisplay(event, SIZE)
 
 if result == 1:
-    walls = read_wall_data_from_file('Lvl_1.txt')
+    FPS = 10
 elif result == 2:
-    walls = read_wall_data_from_file('Lvl_2.txt')
+    FPS = 20
 elif result == 3:
-    walls = read_wall_data_from_file('Lvl_3.txt')
+    FPS = 30
+
 
 '''
 
