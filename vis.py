@@ -78,11 +78,11 @@ def DrawStartDisplay(screen, event, size):
     head_font = pygame.freetype.Font("COOPBL.TTF", 60)
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
     screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 20))
-    pygame.draw.rect(screen, mo.AQUAMARINE,
+    pygame.draw.rect(screen, mo.ORANGE,
                      (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
-    pygame.draw.rect(screen, mo.YELLOW,
+    pygame.draw.rect(screen, mo.ORANGE,
                      (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70, size * mo.HEIGHT / 8))
-    pygame.draw.rect(screen, mo.RED,
+    pygame.draw.rect(screen, mo.ORANGE,
                      (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
     pygame.draw.circle(screen, mo.YELLOW_GREEN, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
                        size * mo.HEIGHT / 10)
@@ -92,13 +92,13 @@ def DrawStartDisplay(screen, event, size):
                        size * mo.HEIGHT / 10)
 
     my_font = pygame.freetype.Font('comic.ttf', 40)
-    easy, rect, = my_font.render("EASY", mo.BLACK)
-    screen.blit(easy, (size * 105 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-    medium, rect = my_font.render("MEDIUM", mo.BLACK)
-    screen.blit(medium, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-    hard, rect = my_font.render("HARD", mo.BLACK)
+    level, rect, = my_font.render("LEVEL 1", mo.BLACK)
+    screen.blit(level, (size * 105 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    level, rect = my_font.render("LEVEL 2", mo.BLACK)
+    screen.blit(level, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    level, rect = my_font.render("LEVEL 3", mo.BLACK)
     my_font = pygame.freetype.Font('comic.ttf', 35)
-    screen.blit(hard, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    screen.blit(level, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     table, rect = my_font.render("Table of")
     screen.blit(table, (size * 95 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
     screen.blit(table, (size * 295 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
@@ -149,19 +149,19 @@ def DrawStartDisplay(screen, event, size):
 
 def DrawChoiceDisplay(screen, event, size):
     screen.fill(mo.WHITE)
-    pygame.draw.rect(screen, mo.ORANGE,
+    pygame.draw.rect(screen, mo.GREEN,
                      (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
-    pygame.draw.rect(screen, mo.ORANGE,
+    pygame.draw.rect(screen, mo.YELLOW,
                      (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
-    pygame.draw.rect(screen, mo.ORANGE,
+    pygame.draw.rect(screen, mo.RED,
                      (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
     my_font = pygame.freetype.Font('comic.ttf', 45)
-    level, rect = my_font.render("LEVEL 1", mo.BLACK)
-    screen.blit(level, (size * 24 * mo.WIDTH / 60, 13 * size * mo.HEIGHT / 70))
-    level, rect = my_font.render("LEVEL 2", mo.BLACK)
-    screen.blit(level, (size * 24 * mo.WIDTH / 60, 33 * size * mo.HEIGHT / 70))
-    level, rect = my_font.render("LEVEL 3", mo.BLACK)
-    screen.blit(level, (size * 24 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
+    easy, rect = my_font.render("EASY", mo.BLACK)
+    screen.blit(easy, (size * 24 * mo.WIDTH / 60, 13 * size * mo.HEIGHT / 70))
+    medium, rect = my_font.render("MEDIUM", mo.BLACK)
+    screen.blit(medium, (size * 24 * mo.WIDTH / 60, 33 * size * mo.HEIGHT / 70))
+    hard, rect = my_font.render("HARD", mo.BLACK)
+    screen.blit(hard, (size * 24 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
     text_font = pygame.freetype.Font('comic.ttf', 50)
     text_level, rect = text_font.render("Choose you level!")
     screen.blit(text_level, (size * 16 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
