@@ -47,12 +47,12 @@ screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
 
 def StartDisplay(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
-            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
+        if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:
+            if size * 90 * mo.WIDTH / 700 <= event.pos[0] <= size * (9 / 70 + 99 / 500) * mo.WIDTH:
                 return 1
-            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
+            elif size * 290 * mo.WIDTH / 700 <= event.pos[0] <= size * (29 / 70 + 99 / 500) * mo.WIDTH:
                 return 2
-            elif size * 5 / 7 * mo.WIDTH <= event.pos[0] <= size * 6 / 7 * mo.WIDTH:
+            elif size * 490 * mo.WIDTH / 700 <= event.pos[0] <= size * (49 / 70 + 99 / 500) * mo.WIDTH:
                 return 3
     return 0
 
@@ -84,11 +84,11 @@ while not finished and result == 0:
         result = StartDisplay(event, SIZE)
 
 if result == 1:
-    walls = read_wall_data_from_file('Lvl_1.txt')
+    FPS = 10
 elif result == 2:
-    walls = read_wall_data_from_file('Lvl_2.txt')
+    FPS = 20
 elif result == 3:
-    walls = read_wall_data_from_file('Lvl_3.txt')
+    FPS = 30
 
 result = 0
 while not finished and result == 0:
@@ -96,12 +96,13 @@ while not finished and result == 0:
     for event in pygame.event.get():
         DrawChoiceDisplay(screen, event, SIZE)
         result = ChoiceDisplay(event, SIZE)
+
 if result == 1:
-    FPS = 10
+    walls = read_wall_data_from_file('Lvl_1.txt')
 elif result == 2:
-    FPS = 20
+    walls = read_wall_data_from_file('Lvl_2.txt')
 elif result == 3:
-    FPS = 30
+    walls = read_wall_data_from_file('Lvl_3.txt')
 
 '''
 

@@ -79,11 +79,14 @@ def DrawStartDisplay(screen, event, size):
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
     screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 20))
     pygame.draw.rect(screen, mo.ORANGE,
-                     (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+                     (size * 90 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                      size * mo.HEIGHT / 9))
     pygame.draw.rect(screen, mo.ORANGE,
-                     (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70, size * mo.HEIGHT / 8))
+                     (size * 290 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                      size * mo.HEIGHT / 9))
     pygame.draw.rect(screen, mo.ORANGE,
-                     (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8))
+                     (size * 490 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                      size * mo.HEIGHT / 9))
     pygame.draw.circle(screen, mo.YELLOW_GREEN, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
                        size * mo.HEIGHT / 10)
     pygame.draw.circle(screen, mo.YELLOW_GREEN, (35 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
@@ -93,12 +96,12 @@ def DrawStartDisplay(screen, event, size):
 
     my_font = pygame.freetype.Font('comic.ttf', 40)
     level, rect, = my_font.render("LEVEL 1", mo.BLACK)
-    screen.blit(level, (size * 105 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    screen.blit(level, (size * 95 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     level, rect = my_font.render("LEVEL 2", mo.BLACK)
-    screen.blit(level, (size * 281 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    screen.blit(level, (size * 295 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     level, rect = my_font.render("LEVEL 3", mo.BLACK)
     my_font = pygame.freetype.Font('comic.ttf', 35)
-    screen.blit(level, (size * 503 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
+    screen.blit(level, (size * 495 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     table, rect = my_font.render("Table of")
     screen.blit(table, (size * 95 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
     screen.blit(table, (size * 295 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
@@ -111,8 +114,8 @@ def DrawStartDisplay(screen, event, size):
     screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
 
     text_font = pygame.freetype.Font('comic.ttf', 50)
-    text, rect = text_font.render("Choose your difficulty level!")
-    screen.blit(text, (size * 8 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
+    text, rect = text_font.render("Choose your level!")
+    screen.blit(text, (size * 18 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
     text, rect = text_font.render("Table of results")
     screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
     description, rect = text_font.render("Eat all the Morties")
@@ -120,19 +123,20 @@ def DrawStartDisplay(screen, event, size):
     description, rect = text_font.render("or they'll eat you")
     screen.blit(description, (size * 20 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 5))
     if event.type == pygame.MOUSEMOTION:
-        if size * mo.HEIGHT / 3 <= event.pos[1] <= 11 * size * mo.WIDTH / 24:
-            if size * mo.WIDTH / 7 <= event.pos[0] <= 2 * size * mo.WIDTH / 7:
+        if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:
+            if size * 90 * mo.WIDTH / 700 <= event.pos[0] <= size * (9 / 70 + 99 / 500) * mo.WIDTH:
                 pygame.draw.rect(screen, mo.BLACK,
-                                 (size * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7, size * mo.HEIGHT / 8),
+                                 (size * 90 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                                  size * mo.HEIGHT / 9),
                                  2)
-            elif size * 28 * mo.WIDTH / 70 <= event.pos[0] <= size * mo.WIDTH * 43 / 70:
+            elif size * 290 * mo.WIDTH / 700 <= event.pos[0] <= size * (29 / 70 + 99 / 500) * mo.WIDTH:
                 pygame.draw.rect(screen, mo.BLACK,
-                                 (size * 28 * mo.WIDTH / 70, size * mo.HEIGHT / 3, size * 15 * mo.WIDTH / 70,
-                                  size * mo.HEIGHT / 8), 2)
-            elif size * 5 / 7 * mo.WIDTH <= event.pos[0] <= size * 6 / 7 * mo.WIDTH:
+                                 (size * 290 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                                  size * mo.HEIGHT / 9), 2)
+            elif size * 490 * mo.WIDTH / 700 <= event.pos[0] <= size * (49 / 70 + 99 / 500) * mo.WIDTH:
                 pygame.draw.rect(screen, mo.BLACK,
-                                 (size * 5 * mo.WIDTH / 7, size * mo.HEIGHT / 3, size * mo.WIDTH / 7,
-                                  size * mo.HEIGHT / 8), 2)
+                                 (size * 490 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
+                                  size * mo.HEIGHT / 9), 2)
         if (event.pos[0] - size * 15 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
                 size * mo.HEIGHT / 10) ** 2:
             pygame.draw.circle(screen, mo.BLACK, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
@@ -157,14 +161,14 @@ def DrawChoiceDisplay(screen, event, size):
                      (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
     my_font = pygame.freetype.Font('comic.ttf', 45)
     easy, rect = my_font.render("EASY", mo.BLACK)
-    screen.blit(easy, (size * 24 * mo.WIDTH / 60, 13 * size * mo.HEIGHT / 70))
+    screen.blit(easy, (size * 52 * mo.WIDTH / 120, 13 * size * mo.HEIGHT / 70))
     medium, rect = my_font.render("MEDIUM", mo.BLACK)
-    screen.blit(medium, (size * 24 * mo.WIDTH / 60, 33 * size * mo.HEIGHT / 70))
+    screen.blit(medium, (size * 46 * mo.WIDTH / 120, 33 * size * mo.HEIGHT / 70))
     hard, rect = my_font.render("HARD", mo.BLACK)
-    screen.blit(hard, (size * 24 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
+    screen.blit(hard, (size * 26 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
     text_font = pygame.freetype.Font('comic.ttf', 50)
-    text_level, rect = text_font.render("Choose you level!")
-    screen.blit(text_level, (size * 16 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
+    text_level, rect = text_font.render("Choose your difficulty level!")
+    screen.blit(text_level, (size * 8 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
     rick_surf = pygame.image.load('Rick1.png')
     rick_surf = pygame.transform.scale(rick_surf, ((2 * rick_surf.get_width() // 5,
                                                     2 * rick_surf.get_height() // 5)))
@@ -193,13 +197,14 @@ def DrawChoiceDisplay(screen, event, size):
                                  2)
             elif 3 * size * mo.HEIGHT / 7 <= event.pos[1] <= 4 * size * mo.HEIGHT / 7:
                 pygame.draw.rect(screen, mo.BLACK,
-                                 (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
+                                 (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH,
+                                  size * mo.HEIGHT / 7),
                                  2)
             elif 5 * size * mo.HEIGHT / 7 <= event.pos[1] <= 6 * size * mo.HEIGHT / 7:
                 pygame.draw.rect(screen, mo.BLACK,
-                                 (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
+                                 (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH,
+                                  size * mo.HEIGHT / 7),
                                  2)
-
 
 
 def Draw_table(screen, table, place):
