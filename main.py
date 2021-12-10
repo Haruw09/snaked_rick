@@ -82,6 +82,14 @@ while not finished and result == 0:
     for event in pygame.event.get():
         DrawStartDisplay(screen, event, SIZE)
         result = StartDisplay(event, SIZE)
+
+if result == 1:
+    FPS = 10
+elif result == 2:
+    FPS = 20
+elif result == 3:
+    FPS = 30
+
 result = 0
 while not finished and result == 0:
     pygame.display.update()
@@ -89,12 +97,18 @@ while not finished and result == 0:
         DrawChoiceDisplay(screen, event, SIZE)
         result = ChoiceDisplay(event, SIZE)
 
+if result == 1:
+    walls = read_wall_data_from_file('Lvl_1.txt')
+elif result == 2:
+    walls = read_wall_data_from_file('Lvl_2.txt')
+elif result == 3:
+    walls = read_wall_data_from_file('Lvl_3.txt')
+
 '''
 
 Считываем файлы с параметрами змейки, стен и змеек - еды
 '''
 main_snake = read_main_snake_data_from_file('main_snake.txt')
-walls = read_wall_data_from_file('Lvl_3.txt')
 food = read_food_data_from_file('food.txt')
 
 '''
