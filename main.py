@@ -185,7 +185,7 @@ while not finished and main_snake.death == 0:
         if main_snake.collision(food[food_number].coordinates) == 1:
             l = len(main_snake.coordinates)
             x_end = main_snake.coordinates[l - 1][0]
-            y_end = main_snake.coordinates[l - 1][0]
+            y_end = main_snake.coordinates[l - 1][1]
             main_snake.elongation(x_end, y_end)
             score += 1
 
