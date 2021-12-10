@@ -111,10 +111,13 @@ while not finished and result == 0:
 
 if result == 1:
     FPS = 10
+    score_for_food = 1
 elif result == 2:
     FPS = 20
+    score_for_food = 2
 elif result == 3:
     FPS = 30
+    score_for_food = 3
 
 
 '''
@@ -214,7 +217,7 @@ while not finished and main_snake.death == 0:
             x_end = main_snake.coordinates[l - 1][0]
             y_end = main_snake.coordinates[l - 1][1]
             main_snake.elongation(x_end, y_end)
-            score += 1
+            score += score_for_food
 
             flag = 0
             while flag == 0:
