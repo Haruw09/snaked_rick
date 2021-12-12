@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from random import randint
 
@@ -160,8 +162,18 @@ DrawField(screen)
 
 Тут мы начинаем гонять нашу игру, пока змея не врежится в стену или не укусит сама себя
 '''
-pygame.mixer.music.load('breaktime.mp3')
-pygame.mixer.music.play(-1)
+rnd = random.randint(1, 3)
+if rnd == 1:
+    pygame.mixer.music.load('breaktime.mp3')
+    pygame.mixer.music.play(-1)
+elif rnd == 2:
+    pygame.mixer.music.load('carefree.mp3')
+    pygame.mixer.music.play(-1)
+elif rnd == 3:
+    pygame.mixer.music.load('fretless.mp3')
+    pygame.mixer.music.play(-1)
+
+
 while not finished and main_snake.death == 0:
     clock.tick(FPS)
     '''
