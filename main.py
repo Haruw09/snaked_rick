@@ -5,7 +5,7 @@ from input import *
 from model_objects import *
 from vis import *
 import time
-
+pygame.init()
 '''
 
 Параметры игры (ФПС - влияет на скорость игры, начальное кол-во очков (Почти всегда это 0))
@@ -88,7 +88,8 @@ finished = False
 result = 0
 # while not finished:
 # if screen_number == 1:
-
+pygame.mixer.music.load('fasterdoesit.mp3')
+pygame.mixer.music.play(-1)
 while not finished and result == 0:
     pygame.display.update()
     for event in pygame.event.get():
@@ -159,7 +160,8 @@ DrawField(screen)
 
 Тут мы начинаем гонять нашу игру, пока змея не врежится в стену или не укусит сама себя
 '''
-
+pygame.mixer.music.load('breaktime.mp3')
+pygame.mixer.music.play(-1)
 while not finished and main_snake.death == 0:
     clock.tick(FPS)
     '''
@@ -295,6 +297,8 @@ name = ''
 
 Работает, пока не нажата стрелочка вправо
 '''
+pygame.mixer.music.load('fivecardshuffle.mp3')
+pygame.mixer.music.play(-1)
 while not finished and not right_pressed:
     '''
     
