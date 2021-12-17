@@ -342,7 +342,7 @@ while not finished and not right_pressed:
 
 Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
 '''
-table = top_entry(score, name)
+table = input.top_entry(score, name)
 
 '''
 
