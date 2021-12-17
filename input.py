@@ -162,7 +162,7 @@ def top_entry(score, changing_name):
 
     20 элемент - место текущего игрока в этой таблице (Если место больше 10, то в всегда будет отдавать 11)
     """
-    file = read_file('top.txt')
+    file = read_file('other\\top.txt')
     top = []
     names = []
     place = 11
@@ -184,7 +184,7 @@ def top_entry(score, changing_name):
                 place = i + 1
 
     table = []
-    out = open('top.txt', 'w')
+    out = open('other\\top.txt', 'w')
     for i in range(9):
         out.write(str(top[i]) + ' ' + str(names[i]) + '\n')
         table.append(str(top[i]))

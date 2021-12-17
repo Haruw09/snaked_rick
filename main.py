@@ -88,9 +88,7 @@ clock = pygame.time.Clock()
 screen_number = 1
 finished = False
 result = 0
-# while not finished:
-# if screen_number == 1:
-pygame.mixer.music.load('fasterdoesit.mp3')
+pygame.mixer.music.load('music\\fasterdoesit.mp3')
 pygame.mixer.music.play(-1)
 while not finished and result == 0:
     pygame.display.update()
@@ -99,11 +97,11 @@ while not finished and result == 0:
         result = StartDisplay(event, SIZE)
 
 if result == 1:
-    walls = read_wall_data_from_file('Lvl_1.txt')
+    walls = read_wall_data_from_file('levels\\Lvl_1.txt')
 elif result == 2:
-    walls = read_wall_data_from_file('Lvl_2.txt')
+    walls = read_wall_data_from_file('levels\\Lvl_2.txt')
 elif result == 3:
-    walls = read_wall_data_from_file('Lvl_3.txt')
+    walls = read_wall_data_from_file('levels\\Lvl_3.txt')
 
 result = 0
 while not finished and result == 0:
@@ -127,8 +125,8 @@ elif result == 3:
 
 Считываем файлы с параметрами змейки, стен и змеек - еды
 '''
-main_snake = read_main_snake_data_from_file('main_snake.txt')
-food = read_food_data_from_file('food.txt')
+main_snake = read_main_snake_data_from_file('other\\main_snake.txt')
+food = read_food_data_from_file('other\\food.txt')
 
 '''
 
@@ -164,13 +162,13 @@ DrawField(screen)
 '''
 rnd = random.randint(1, 3)
 if rnd == 1:
-    pygame.mixer.music.load('breaktime.mp3')
+    pygame.mixer.music.load('music\\breaktime.mp3')
     pygame.mixer.music.play(-1)
 elif rnd == 2:
-    pygame.mixer.music.load('carefree.mp3')
+    pygame.mixer.music.load('music\\carefree.mp3')
     pygame.mixer.music.play(-1)
 elif rnd == 3:
-    pygame.mixer.music.load('fretless.mp3')
+    pygame.mixer.music.load('music\\fretless.mp3')
     pygame.mixer.music.play(-1)
 
 
@@ -309,7 +307,7 @@ name = ''
 
 Работает, пока не нажата стрелочка вправо
 '''
-pygame.mixer.music.load('fivecardshuffle.mp3')
+pygame.mixer.music.load('music\\fivecardshuffle.mp3')
 pygame.mixer.music.play(-1)
 while not finished and not right_pressed:
     '''
