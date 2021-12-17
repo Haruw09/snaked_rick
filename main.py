@@ -3,7 +3,7 @@ import random
 import pygame
 from random import randint
 
-from input import *
+import input
 import model_objects as mo
 import vis
 import time
@@ -97,11 +97,11 @@ while not finished and result == 0:
         result = StartDisplay(event, SIZE)
 
 if result == 1:
-    walls = read_wall_data_from_file('levels\\Lvl_1.txt')
+    walls = input.read_wall_data('levels\\Lvl_1.txt')
 elif result == 2:
-    walls = read_wall_data_from_file('levels\\Lvl_2.txt')
+    walls = input.read_wall_data('levels\\Lvl_2.txt')
 elif result == 3:
-    walls = read_wall_data_from_file('levels\\Lvl_3.txt')
+    walls = input.read_wall_data('levels\\Lvl_3.txt')
 
 result = 0
 while not finished and result == 0:
@@ -125,8 +125,8 @@ elif result == 3:
 
 Считываем файлы с параметрами змейки, стен и змеек - еды
 '''
-main_snake = read_main_snake_data_from_file('other\\main_snake.txt')
-food = read_food_data_from_file('other\\food.txt')
+main_snake = input.read_main_snake_data('other\\main_snake.txt')
+food = input.read_food_data('other\\food.txt')
 
 '''
 

@@ -1,7 +1,7 @@
 from model_objects import Wall, MainSnake, Food, Enemy
 
 
-def read_wall_data_from_file(input_filename):
+def read_wall_data(input_filename):
     """
 
     Считывает данные о стене из строки
@@ -33,10 +33,10 @@ def read_wall_data_from_file(input_filename):
             wall = Wall(x_begin, y_begin, x_end, y_end)
             walls.append(wall)
 
-    return (walls)
+    return walls
 
 
-def read_main_snake_data_from_file(input_filename):
+def read_main_snake_data(input_filename):
     """
 
     Считывает данные о главной змее из файла
@@ -64,10 +64,10 @@ def read_main_snake_data_from_file(input_filename):
 
             snake = MainSnake(coordinates, direction)
 
-    return (snake)
+    return snake
 
 
-def read_food_data_from_file(input_filename):
+def read_food_data(input_filename):
     """
 
     Считывает данные о змеях-еде из файла, создаёт сами объекты и вызывает создание их графических образов
@@ -92,10 +92,10 @@ def read_food_data_from_file(input_filename):
 
             snake = Food(coordinates, direction)
             foods.append(snake)
-    return (foods)
+    return foods
 
 
-def read_enemy_data_from_file(input_filename):
+def read_enemy_data(input_filename):
     """
 
     Считывает данные о змеях-врагах из файла, создаёт сами объекты и вызывает создание их графических образов
@@ -113,14 +113,12 @@ def read_enemy_data_from_file(input_filename):
             direction = tokens[-2]
             coordinates = []
             for i in range(0, len(tokens) - 2, 2):
-                cell = []
-                cell.append(int(tokens[i]))
-                cell.append(int(tokens[i + 1]))
+                cell = [int(tokens[i]), int(tokens[i + 1])]
                 coordinates.append(cell)
 
             snake = Enemy(coordinates, direction)
             enemies.append(snake)
-    return (enemies)
+    return enemies
 
 
 def read_file(file_name):
