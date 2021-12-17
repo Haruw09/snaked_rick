@@ -4,8 +4,8 @@ import pygame
 from random import randint
 
 from input import *
-from model_objects import *
-from vis import *
+import model_objects as mo
+import vis
 import time
 pygame.init()
 '''
@@ -93,7 +93,7 @@ pygame.mixer.music.play(-1)
 while not finished and result == 0:
     pygame.display.update()
     for event in pygame.event.get():
-        DrawStartDisplay(screen, event, SIZE)
+        vis.DrawStartDisplay(screen, event, SIZE)
         result = StartDisplay(event, SIZE)
 
 if result == 1:
@@ -107,7 +107,7 @@ result = 0
 while not finished and result == 0:
     pygame.display.update()
     for event in pygame.event.get():
-        DrawChoiceDisplay(screen, event, SIZE)
+        vis.DrawChoiceDisplay(screen, event, SIZE)
         result = ChoiceDisplay(event, SIZE)
 
 if result == 1:
@@ -135,7 +135,7 @@ food = read_food_data_from_file('other\\food.txt')
 Из всех змеек-еды выбираем одну с помощью рандома
 '''
 for wall in walls:
-    DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
+    vis.DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
 
 live_food = [0] * number_of_food
 for num in range(number_of_food):
@@ -151,10 +151,10 @@ for num in range(number_of_food):
             if live_food[another_num] == live_food[num]:
                 flag = 0
 
-    DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
+    vis.DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
-DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
-DrawField(screen)
+vis.DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
+vis.DrawField(screen)
 
 '''
 
@@ -190,7 +190,7 @@ while not finished and main_snake.death == 0:
         
         Рисуем стену
         '''
-        DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
+        vis.DrawWall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, screen)
         '''
         
         Проверяем, ударилась ли главная змея со стеной
@@ -214,7 +214,7 @@ while not finished and main_snake.death == 0:
     Рисуем змейку-еду
     '''
     for num in live_food:
-        DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
+        vis.DrawSnake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
     '''
     
@@ -256,7 +256,7 @@ while not finished and main_snake.death == 0:
     
     Рисуем змею
     '''
-    DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
+    vis.DrawSnake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
 
     '''
     
@@ -316,7 +316,7 @@ while not finished and not right_pressed:
     '''
     pygame.display.update()
     screen.fill(WHITE)
-    End_game_display(screen, score, name)
+    vis.EndGameDisplay(screen, score, name)
 
     '''
     
@@ -330,7 +330,7 @@ while not finished and not right_pressed:
     '''
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            letter = Alphabet()
+            letter = vis.Alphabet()
             if letter == 'BACKSPACE':
                 name = name[:-1]
             elif letter == 'RIGHT':
@@ -354,7 +354,7 @@ bottom_pressed = False
 while not finished and not bottom_pressed:
     pygame.display.update()
     screen.fill(WHITE)
-    Draw_table(screen, table, table[20])
+    vis.DrawTable(screen, table, table[20])
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             bottom_pressed = True

@@ -43,7 +43,7 @@ def DrawField(screen):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
 
 
-def End_game_display(screen, score, name):
+def EndGameDisplay(screen, score, name):
     """
 
     Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
@@ -207,7 +207,7 @@ def DrawChoiceDisplay(screen, event, size):
                                  2)
 
 
-def Draw_table(screen, table, place):
+def DrawTable(screen, table, place):
     """
 
     Рисуем экран с таблицей лидеров
