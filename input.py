@@ -1,5 +1,5 @@
 from model_objects import Wall, MainSnake, Food
-
+import pygame
 
 def read_wall_data(input_filename):
     """
@@ -169,3 +169,19 @@ def top_entry(score, changing_name):
     out.close()
 
     return table
+
+
+def alphabet(event, key):
+    """
+
+    Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
+
+    Функция возвращает символ, соответсвующий нажатой клавише
+    """
+    if key[pygame.K_RETURN] or key[pygame.K_TAB]:
+        return ''
+    if key[pygame.K_BACKSPACE]:
+        return 'BACKSPACE'
+    if key[pygame.K_RIGHT]:
+        return 'RIGHT'
+    return event.unicode

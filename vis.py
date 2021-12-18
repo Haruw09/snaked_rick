@@ -14,7 +14,7 @@ def DrawImage(name, size, scale, screen, bottom_right_x, bottom_right_y, width, 
     screen.blit(surface, rectangle)
 
 
-def DrawSnake(coordinates, color, head_color, screen):
+def draw_snake(coordinates, color, head_color, screen):
     """
 
     Функция рисует змейку по квадратикам.
@@ -34,7 +34,7 @@ def DrawSnake(coordinates, color, head_color, screen):
     pygame.draw.rect(screen, head_color, (coordinates[0][0] * SIZE, coordinates[0][1] * SIZE, SIZE, SIZE))
 
 
-def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
+def draw_wall(x_begin, y_begin, x_end, y_end, color, screen):
     """
 
     Функция рисует стену
@@ -47,11 +47,11 @@ def DrawWall(x_begin, y_begin, x_end, y_end, color, screen):
                      (x_begin * SIZE, y_begin * SIZE, (x_end - x_begin + 1) * SIZE, (y_end - y_begin + 1) * SIZE))
 
 
-def DrawField(screen):
+def draw_field(screen):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
 
 
-def EndGameDisplay(screen, score, name, size):
+def draw_end_display(screen, score, name, size):
     """
 
     Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
@@ -79,6 +79,7 @@ def EndGameDisplay(screen, score, name, size):
 
     text_press_right, rect = my_font.render('Press key "->" to continue', mo.BLACK)
     screen.blit(text_press_right, (10 * size / 20, 130 * size / 20))
+
     rick_surf = pygame.image.load('images\\end.png')
     rick_surf = pygame.transform.scale(rick_surf, ((int(rick_surf.get_width() * size / 20),
                                                     int(rick_surf.get_height() * size / 20))))
@@ -86,7 +87,7 @@ def EndGameDisplay(screen, score, name, size):
     screen.blit(rick_surf, rick_rect)
 
 
-def DrawStartDisplay(screen, event, size):
+def draw_start_display(screen, event, size):
     screen.fill(mo.WHITE)
     head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * size / 20)
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
@@ -166,7 +167,7 @@ def DrawStartDisplay(screen, event, size):
                                size * mo.HEIGHT / 10, 2)
 
 
-def DrawChoiceDisplay(screen, event, size):
+def draw_choice_display(screen, event, size):
     screen.fill(mo.WHITE)
     pygame.draw.rect(screen, mo.GREEN,
                      (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
@@ -222,7 +223,7 @@ def DrawChoiceDisplay(screen, event, size):
                                  2)
 
 
-def DrawTable(screen, table, place, size):
+def draw_table(screen, table, place, size):
     """
 
     Рисуем экран с таблицей лидеров
@@ -274,17 +275,4 @@ def DrawTable(screen, table, place, size):
     screen.blit(rick_surf, rick_rect)
 
 
-def Alphabet(event, key):
-    """
 
-    Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
-
-    Функция возвращает символ, соответсвующий нажатой клавише
-    """
-    if key[pygame.K_RETURN] or key[pygame.K_TAB]:
-        return ''
-    if key[pygame.K_BACKSPACE]:
-        return 'BACKSPACE'
-    if key[pygame.K_RIGHT]:
-        return 'RIGHT'
-    return event.unicode
