@@ -3,7 +3,7 @@ import pygame.freetype
 import model_objects as mo
 
 pygame.freetype.init()
-SIZE = 10
+SIZE = 16
 
 
 def DrawSnake(coordinates, color, head_color, screen):
@@ -57,19 +57,19 @@ def EndGameDisplay(screen, score, name, size):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
 
-    text_game_over, rect = my_font.render("GAME OVER. YOUR SCORE IS ", mo.BLACK)
+    text_game_over, rect = my_font.render("Game over. Your score is ", mo.BLACK)
     screen.blit(text_game_over, (10 * size / 20, 10 * size / 20))
 
     text_score, rect = my_font.render(str(score), mo.BLACK)
-    screen.blit(text_score, (680 * size / 20, 10 * size / 20))
+    screen.blit(text_score, (545 * size / 20, 10 * size / 20))
 
-    text_write_name, rect = my_font.render('WRITE YOUR NAME', mo.BLACK)
+    text_write_name, rect = my_font.render('Write your name: ', mo.BLACK)
     screen.blit(text_write_name, (10 * size / 20, 70 * size / 20))
 
     text_name, rect = my_font.render(str(name), mo.BLACK)
-    screen.blit(text_name, (500 * size / 20, 70 * size / 20))
+    screen.blit(text_name, (400 * size / 20, 70 * size / 20))
 
-    text_press_right, rect = my_font.render('PRESS KEY -> TO CONTINUE', mo.BLACK)
+    text_press_right, rect = my_font.render('Press key "->" to continue', mo.BLACK)
     screen.blit(text_press_right, (10 * size / 20, 130 * size / 20))
     rick_surf = pygame.image.load('images\\end.png')
     rick_surf = pygame.transform.scale(rick_surf, ((int(rick_surf.get_width() * size / 20),
@@ -233,19 +233,19 @@ def DrawTable(screen, table, place, size):
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
 
     if place <= 10:
-        text_congratulations, rect = my_font.render("CONGRATULATIONS!", mo.BLACK)
+        text_congratulations, rect = my_font.render("Congratulations!", mo.BLACK)
         screen.blit(text_congratulations, (10 * size / 20, 10 * size / 20))
 
-        text_your_place, rect = my_font.render("YOUR PLACE IS ", mo.BLACK)
+        text_your_place, rect = my_font.render("Your place is ", mo.BLACK)
         screen.blit(text_your_place, (10 * size / 20, 60 * size / 20))
 
         text_place, rect = my_font.render(str(place), mo.BLACK)
         screen.blit(text_place, (400 * size / 20, 60 * size / 20))
     else:
-        text_not_in_the_top, rect = my_font.render("YOU'RE TOO BAD!", mo.BLACK)
+        text_not_in_the_top, rect = my_font.render("You're too bad!", mo.BLACK)
         screen.blit(text_not_in_the_top, (10 * size / 20, 10 * size / 20))
 
-        text_try_again, rect = my_font.render("TRY AGAIN", mo.BLACK)
+        text_try_again, rect = my_font.render("Try again!", mo.BLACK)
         screen.blit(text_try_again, (10 * size / 20, 60 * size / 20))
 
     for i in range(0, 10):
@@ -255,8 +255,15 @@ def DrawTable(screen, table, place, size):
         text_name, rect = my_font.render(str(table[2 * i + 1]), mo.BLACK)
         screen.blit(text_name, (150 * size / 20, (150 + i * 50) * size / 20))
 
-    text_press_any_key, rect = my_font.render("PRESS ANY KEY TO EXIT", mo.BLACK)
-    screen.blit(text_press_any_key, (10 * size / 20, 750))
+    text_press_any_key, rect = my_font.render("Press any key to exit", mo.BLACK)
+    screen.blit(text_press_any_key, (10 * size / 20, 700 * size / 20))
+    text_press_any_key, rect = my_font.render("Thanks for playing!", mo.BLACK)
+    screen.blit(text_press_any_key, (10 * size / 20, 750 * size / 20))
+    rick_surf = pygame.image.load('images\\rickroll.jpg')
+    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() * size // 25,
+                                                    rick_surf.get_height() * size // 25)))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 12 * mo.WIDTH / 10, 65 * size * mo.HEIGHT / 80))
+    screen.blit(rick_surf, rick_rect)
 
 
 def Alphabet():
