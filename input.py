@@ -1,4 +1,4 @@
-from model_objects import Wall, MainSnake, Food, Enemy
+from model_objects import Wall, MainSnake, Food
 
 
 def read_wall_data(input_filename):
@@ -93,32 +93,6 @@ def read_food_data(input_filename):
             snake = Food(coordinates, direction)
             foods.append(snake)
     return foods
-
-
-def read_enemy_data(input_filename):
-    """
-
-    Считывает данные о змеях-врагах из файла, создаёт сами объекты и вызывает создание их графических образов
-
-    input_filename - имя считываемого файла
-    """
-    enemies = []
-    with open(input_filename, 'r') as input_file:
-        for line in input_file:
-            if len(line.strip()) == 0 or line[0] == '#':
-                continue
-
-            tokens = line.split(' ')
-            color = tokens[-1]
-            direction = tokens[-2]
-            coordinates = []
-            for i in range(0, len(tokens) - 2, 2):
-                cell = [int(tokens[i]), int(tokens[i + 1])]
-                coordinates.append(cell)
-
-            snake = Enemy(coordinates, direction)
-            enemies.append(snake)
-    return enemies
 
 
 def read_file(file_name):
