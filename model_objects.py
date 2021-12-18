@@ -1,4 +1,5 @@
 import pygame
+
 # Цвета
 RED = 0xFF0000
 BLUE = 0x0000FF
@@ -193,9 +194,3 @@ class Food(Snakes):
                 dir = 'a'
 
         self.direction = dir
-
-
-class Enemy(Snakes):
-    def __init__(self, coordinates, direction):
-        Snakes.__init__(self, coordinates, direction)
-        self.color = MAGENTA

@@ -7,6 +7,7 @@ import input
 import model_objects as mo
 import vis
 import time
+
 pygame.init()
 '''
 
@@ -95,7 +96,6 @@ def update(event):
         return True
     else:
         return False
-    # finished = update(event)
 
 
 pygame.display.update()
@@ -136,7 +136,6 @@ elif result == 2:
 elif result == 3:
     FPS = 30
     score_for_food = 3
-
 
 '''
 
@@ -187,7 +186,6 @@ elif rnd == 2:
 elif rnd == 3:
     pygame.mixer.music.load('music\\fretless.mp3')
     pygame.mixer.music.play(-1)
-
 
 while not finished and main_snake.death == 0:
 
