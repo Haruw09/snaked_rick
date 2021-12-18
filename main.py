@@ -349,7 +349,8 @@ while not finished and not right_pressed:
     '''
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            letter = vis.Alphabet()
+            key = pygame.key.get_pressed()
+            letter = vis.Alphabet(event, key)
             if letter == 'BACKSPACE':
                 name = name[:-1]
             elif letter == 'RIGHT':

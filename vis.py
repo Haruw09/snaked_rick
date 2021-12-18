@@ -266,88 +266,17 @@ def DrawTable(screen, table, place, size):
     screen.blit(rick_surf, rick_rect)
 
 
-def Alphabet():
+def Alphabet(event, key):
     """
 
     Функция преобразует нажатие клавиши в символ, соответствующий этой клавише
 
     Функция возвращает символ, соответсвующий нажатой клавише
     """
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_a]:
-        return 'A'
-    if pressed[pygame.K_b]:
-        return 'B'
-    if pressed[pygame.K_c]:
-        return 'C'
-    if pressed[pygame.K_d]:
-        return 'D'
-    if pressed[pygame.K_e]:
-        return 'E'
-    if pressed[pygame.K_f]:
-        return 'F'
-    if pressed[pygame.K_g]:
-        return 'G'
-    if pressed[pygame.K_h]:
-        return 'H'
-    if pressed[pygame.K_i]:
-        return 'I'
-    if pressed[pygame.K_j]:
-        return 'J'
-    if pressed[pygame.K_k]:
-        return 'K'
-    if pressed[pygame.K_l]:
-        return 'L'
-    if pressed[pygame.K_m]:
-        return 'M'
-    if pressed[pygame.K_n]:
-        return 'N'
-    if pressed[pygame.K_o]:
-        return 'O'
-    if pressed[pygame.K_p]:
-        return 'P'
-    if pressed[pygame.K_q]:
-        return 'Q'
-    if pressed[pygame.K_r]:
-        return 'R'
-    if pressed[pygame.K_s]:
-        return 'S'
-    if pressed[pygame.K_t]:
-        return 'T'
-    if pressed[pygame.K_u]:
-        return 'U'
-    if pressed[pygame.K_v]:
-        return 'V'
-    if pressed[pygame.K_w]:
-        return 'W'
-    if pressed[pygame.K_x]:
-        return 'X'
-    if pressed[pygame.K_y]:
-        return 'Y'
-    if pressed[pygame.K_z]:
-        return 'Z'
-    if pressed[pygame.K_0]:
-        return '0'
-    if pressed[pygame.K_1]:
-        return '1'
-    if pressed[pygame.K_2]:
-        return '2'
-    if pressed[pygame.K_3]:
-        return '3'
-    if pressed[pygame.K_4]:
-        return '4'
-    if pressed[pygame.K_5]:
-        return '5'
-    if pressed[pygame.K_6]:
-        return '6'
-    if pressed[pygame.K_7]:
-        return '7'
-    if pressed[pygame.K_8]:
-        return '8'
-    if pressed[pygame.K_9]:
-        return '9'
-    if pressed[pygame.K_BACKSPACE]:
+    if key[pygame.K_RETURN] or key[pygame.K_TAB]:
+        return ''
+    if key[pygame.K_BACKSPACE]:
         return 'BACKSPACE'
-    if pressed[pygame.K_RIGHT]:
+    if key[pygame.K_RIGHT]:
         return 'RIGHT'
-    return ''
+    return event.unicode
