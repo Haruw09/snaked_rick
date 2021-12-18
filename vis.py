@@ -3,10 +3,10 @@ import pygame.freetype
 import model_objects as mo
 
 pygame.freetype.init()
-SIZE = 16
+SIZE = 15
 
 
-def DrawImage(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
+def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
     surface = pygame.image.load(name)
     surface = pygame.transform.scale(surface, ((int(surface.get_width() * scale * size / 20),
                                                 int(surface.get_height() * scale * size / 20))))
@@ -79,12 +79,7 @@ def draw_end_display(screen, score, name, size):
 
     text_press_right, rect = my_font.render('Press key "->" to continue', mo.BLACK)
     screen.blit(text_press_right, (10 * size / 20, 130 * size / 20))
-
-    rick_surf = pygame.image.load('images\\end.png')
-    rick_surf = pygame.transform.scale(rick_surf, ((int(rick_surf.get_width() * size / 20),
-                                                    int(rick_surf.get_height() * size / 20))))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 10.6 * mo.WIDTH / 10, 75 * size * mo.HEIGHT / 80))
-    screen.blit(rick_surf, rick_rect)
+    draw_image('images\\end.png', size, 1, screen, 1.06, 75 / 80, mo.WIDTH, mo.HEIGHT)
 
 
 def draw_start_display(screen, event, size):
@@ -185,26 +180,10 @@ def draw_choice_display(screen, event, size):
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
     text_level, rect = text_font.render("Choose your difficulty level!")
     screen.blit(text_level, (size * 8 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
-    rick_surf = pygame.image.load('images\\Rick1.png')
-    rick_surf = pygame.transform.scale(rick_surf, ((2 * rick_surf.get_width() * size // 100,
-                                                    2 * rick_surf.get_height() * size // 100)))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 79 * mo.WIDTH / 80, 13 * size * mo.HEIGHT / 30))
-    screen.blit(rick_surf, rick_rect)
-    rick_surf = pygame.image.load('images\\pickle_rick.png')
-    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() * size // 80,
-                                                    rick_surf.get_height() * size // 80)))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 4 * mo.WIDTH / 10, 79 * size * mo.HEIGHT / 80))
-    screen.blit(rick_surf, rick_rect)
-    rick_surf = pygame.image.load('images\\portal.png')
-    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() * size // 40,
-                                                    rick_surf.get_height() * size // 40)))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 9 * mo.WIDTH / 10, 70 * size * mo.HEIGHT / 80))
-    screen.blit(rick_surf, rick_rect)
-    rick_surf = pygame.image.load('images\\wubba.png')
-    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() * size // 100,
-                                                    rick_surf.get_height() * size // 100)))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 3 * mo.WIDTH / 10, 45 * size * mo.HEIGHT / 80))
-    screen.blit(rick_surf, rick_rect)
+    draw_image('images\\Rick1.png', size, 2 / 5, screen, 79 / 80, 13 / 30, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\pickle_rick.png', size, 1/4, screen, 4/10, 79/80, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\portal.png', size, 1/2, screen, 9/10, 7/8, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\wubba.png', size, 1/5, screen, 3/10, 45/80, mo.WIDTH, mo.HEIGHT)
     if event.type == pygame.MOUSEMOTION:
         if size * mo.WIDTH / 3 <= event.pos[0] <= 2 * size * mo.WIDTH / 3:
             if size * mo.HEIGHT / 7 <= event.pos[1] <= 2 * size * mo.HEIGHT / 7:
@@ -268,11 +247,4 @@ def draw_table(screen, table, place, size):
     screen.blit(text_press_any_key, (10 * size / 20, 700 * size / 20))
     text_press_any_key, rect = my_font.render("Thanks for playing!", mo.BLACK)
     screen.blit(text_press_any_key, (10 * size / 20, 750 * size / 20))
-    rick_surf = pygame.image.load('images\\rickroll.jpg')
-    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width() * size // 25,
-                                                    rick_surf.get_height() * size // 25)))
-    rick_rect = rick_surf.get_rect(bottomright=(size * 12 * mo.WIDTH / 10, 65 * size * mo.HEIGHT / 80))
-    screen.blit(rick_surf, rick_rect)
-
-
-
+    draw_image('images\\rickroll.jpg', size, 4 / 5, screen, 12 / 10, 65 / 80, mo.WIDTH, mo.HEIGHT)
