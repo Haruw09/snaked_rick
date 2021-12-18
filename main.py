@@ -285,7 +285,7 @@ while not finished and main_snake.death == 0:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             main_snake.veer()
-            finished = update(event)
+        finished = update(event)
 
     '''
     
