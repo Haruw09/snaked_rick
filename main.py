@@ -38,7 +38,7 @@ YELLOW_GREEN = (154, 205, 50)
 '''
 WIDTH = 41
 HEIGHT = 41
-SIZE = 20
+SIZE = vis.SIZE
 
 '''
 
@@ -354,7 +354,7 @@ bottom_pressed = False
 while not finished and not bottom_pressed:
     pygame.display.update()
     screen.fill(WHITE)
-    vis.DrawTable(screen, table, table[20])
+    vis.DrawTable(screen, table, table[20], SIZE)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             bottom_pressed = True
