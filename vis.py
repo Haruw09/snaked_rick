@@ -7,6 +7,18 @@ SIZE = 15
 
 
 def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
+    """
+    Вывод картинки на экран
+    :param name: имя файла и место расположения
+    :param size: число пикселей в одной клетке змейки
+    :param scale: масштабирование картинки
+    :param screen: экран, на котором рисуется
+    :param bottom_right_x: абсцисса нижнего правого края картинки
+    :param bottom_right_y: ордината нижнего правого края картинки
+    :param width: параметр ширины экрана (в клетках)
+    :param height: параметр высоты экрана (в клетках)
+    :return: рисование картинки на экране
+    """
     surface = pygame.image.load(name)
     surface = pygame.transform.scale(surface, ((int(surface.get_width() * scale * size / 20),
                                                 int(surface.get_height() * scale * size / 20))))
@@ -14,19 +26,28 @@ def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width,
     screen.blit(surface, rectangle)
 
 
+def draw_text(text, font, x, y, size, screen, width, height, color):
+    """
+    Вывод заданного текста на экран
+    :param text: текст в кавычках, который хочется вывести
+    :param font: шрифт, которым нужно писать
+    :param x: абсцисса начала текста
+    :param y: ордината начала текста
+    :param screen: экран вывода
+    :param color: цвет шрифта
+    :return: нарисованный текст
+    """
+    vis_text, rect = font.render(text, color)
+    screen.blit(vis_text, (x * size * width / 20, y * size * height / 20))
+
+
 def draw_snake(coordinates, color, head_color, screen):
     """
-
     Функция рисует змейку по квадратикам.
-
     Сначала рисует кадратики по всем координатам змеи, а только потом голову
-
     coordinates - массив координат змейки
-
     color - цвет змейки
-
     head_color - цвет головы змеи
-
     screen - экран, на котором рисуется змейка
     """
     for position in coordinates:
@@ -36,54 +57,37 @@ def draw_snake(coordinates, color, head_color, screen):
 
 def draw_wall(x_begin, y_begin, x_end, y_end, color, screen):
     """
-
     Функция рисует стену
-
     x_begin, y_begin - координаты левого-верхнего квадратика стены
-
     x_end, y_end - координаты правого-верхнего квадратика стены
     """
     pygame.draw.rect(screen, color,
                      (x_begin * SIZE, y_begin * SIZE, (x_end - x_begin + 1) * SIZE, (y_end - y_begin + 1) * SIZE))
 
 
-def draw_field(screen):
-    pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
+def draw_field(screen, size):
+    pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH * size, mo.HEIGHT * size))
 
 
 def draw_end_display(screen, score, name, size):
     """
-
     Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
-
     screen - экран, на котором всё пишется
-
     score - счёт игрока
-
     name - имя игрока
     """
-    pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
+    draw_field(screen, size)
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
-
-    text_game_over, rect = my_font.render("Game over. Your score is ", mo.BLACK)
-    screen.blit(text_game_over, (10 * size / 20, 10 * size / 20))
-
-    text_score, rect = my_font.render(str(score), mo.BLACK)
-    screen.blit(text_score, (545 * size / 20, 10 * size / 20))
-
-    text_write_name, rect = my_font.render('Write your name: ', mo.BLACK)
-    screen.blit(text_write_name, (10 * size / 20, 70 * size / 20))
-
-    text_name, rect = my_font.render(str(name), mo.BLACK)
-    screen.blit(text_name, (400 * size / 20, 70 * size / 20))
-
-    text_press_right, rect = my_font.render('Press key "->" to continue', mo.BLACK)
-    screen.blit(text_press_right, (10 * size / 20, 130 * size / 20))
+    draw_text("Game over. Your score is ", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text(str(score), my_font, 545 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Write your name: ", my_font, 10 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text(str(name), my_font, 400 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text('Press key "->" to continue', my_font, 10 / 41, 130 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\end.png', size, 1, screen, 1.06, 75 / 80, mo.WIDTH, mo.HEIGHT)
 
 
 def draw_start_display(screen, event, size):
-    screen.fill(mo.WHITE)
+    draw_field(screen, size)
     head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * size / 20)
     head, rect = head_font.render("Snaked Rick", mo.BLACK)
     screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 20))
@@ -163,7 +167,7 @@ def draw_start_display(screen, event, size):
 
 
 def draw_choice_display(screen, event, size):
-    screen.fill(mo.WHITE)
+    draw_field(screen, size)
     pygame.draw.rect(screen, mo.GREEN,
                      (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
     pygame.draw.rect(screen, mo.YELLOW,
@@ -181,9 +185,9 @@ def draw_choice_display(screen, event, size):
     text_level, rect = text_font.render("Choose your difficulty level!")
     screen.blit(text_level, (size * 8 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
     draw_image('images\\Rick1.png', size, 2 / 5, screen, 79 / 80, 13 / 30, mo.WIDTH, mo.HEIGHT)
-    draw_image('images\\pickle_rick.png', size, 1/4, screen, 4/10, 79/80, mo.WIDTH, mo.HEIGHT)
-    draw_image('images\\portal.png', size, 1/2, screen, 9/10, 7/8, mo.WIDTH, mo.HEIGHT)
-    draw_image('images\\wubba.png', size, 1/5, screen, 3/10, 45/80, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\pickle_rick.png', size, 1 / 4, screen, 4 / 10, 79 / 80, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\portal.png', size, 1 / 2, screen, 9 / 10, 7 / 8, mo.WIDTH, mo.HEIGHT)
+    draw_image('images\\wubba.png', size, 1 / 5, screen, 3 / 10, 45 / 80, mo.WIDTH, mo.HEIGHT)
     if event.type == pygame.MOUSEMOTION:
         if size * mo.WIDTH / 3 <= event.pos[0] <= 2 * size * mo.WIDTH / 3:
             if size * mo.HEIGHT / 7 <= event.pos[1] <= 2 * size * mo.HEIGHT / 7:
@@ -217,34 +221,20 @@ def draw_table(screen, table, place, size):
 
     place - место игрока в этой таблице
     """
-    pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
+    draw_field(screen, size)
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
-
     if place <= 10:
-        text_congratulations, rect = my_font.render("Congratulations!", mo.BLACK)
-        screen.blit(text_congratulations, (10 * size / 20, 10 * size / 20))
-
-        text_your_place, rect = my_font.render("Your place is ", mo.BLACK)
-        screen.blit(text_your_place, (10 * size / 20, 60 * size / 20))
-
-        text_place, rect = my_font.render(str(place), mo.BLACK)
-        screen.blit(text_place, (400 * size / 20, 60 * size / 20))
+        draw_text("Congratulations!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("Your place is ", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text(str(place), my_font, 300 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     else:
-        text_not_in_the_top, rect = my_font.render("You're too bad!", mo.BLACK)
-        screen.blit(text_not_in_the_top, (10 * size / 20, 10 * size / 20))
-
-        text_try_again, rect = my_font.render("Try again!", mo.BLACK)
-        screen.blit(text_try_again, (10 * size / 20, 60 * size / 20))
-
+        draw_text("You're too bad!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("Try again!", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     for i in range(0, 10):
-        text_score, rect = my_font.render(str(table[2 * i]), mo.BLACK)
-        screen.blit(text_score, (10 * size / 20, (150 + i * 50) * size / 20))
-
-        text_name, rect = my_font.render(str(table[2 * i + 1]), mo.BLACK)
-        screen.blit(text_name, (150 * size / 20, (150 + i * 50) * size / 20))
-
-    text_press_any_key, rect = my_font.render("Press any key to exit", mo.BLACK)
-    screen.blit(text_press_any_key, (10 * size / 20, 700 * size / 20))
-    text_press_any_key, rect = my_font.render("Thanks for playing!", mo.BLACK)
-    screen.blit(text_press_any_key, (10 * size / 20, 750 * size / 20))
+        draw_text(str(table[2 * i]), my_font, 10 / 41, (150 + i * 50) / 41, size, screen, mo.WIDTH,
+                  mo.HEIGHT, mo.BLACK)
+        draw_text(str(table[2 * i + 1]), my_font, 150 / 41, (150 + i * 50) / 41, size, screen, mo.WIDTH,
+                  mo.HEIGHT, mo.BLACK)
+    draw_text("Press any key to exit", my_font, 10 / 41, 700 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Thanks for playing!", my_font, 10 / 41, 750 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\rickroll.jpg', size, 4 / 5, screen, 12 / 10, 65 / 80, mo.WIDTH, mo.HEIGHT)

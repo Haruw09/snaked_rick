@@ -170,7 +170,7 @@ for num in range(number_of_food):
     vis.draw_snake(food[num].coordinates, food[num].color, food[num].head_color, screen)
 
 vis.draw_snake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
-vis.draw_field(screen)
+vis.draw_field(screen, SIZE)
 
 '''
 
