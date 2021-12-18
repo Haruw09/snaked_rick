@@ -83,6 +83,21 @@ def ChoiceDisplay(event, size):
     return 0
 
 
+def update(event):
+    """
+    Проверка на закрытие программы
+    :param event: пайгеймовский евент
+    :return: True если евент был закрытие программы, иначе False
+    """
+    if event.type == pygame.QUIT:
+        return True
+    elif event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE:
+        return True
+    else:
+        return False
+    # finished = update(event)
+
+
 pygame.display.update()
 clock = pygame.time.Clock()
 screen_number = 1
@@ -95,6 +110,7 @@ while not finished and result == 0:
     for event in pygame.event.get():
         vis.DrawStartDisplay(screen, event, SIZE)
         result = StartDisplay(event, SIZE)
+        finished = update(event)
 
 if result == 1:
     walls = input.read_wall_data('levels\\Lvl_1.txt')
@@ -109,6 +125,7 @@ while not finished and result == 0:
     for event in pygame.event.get():
         vis.DrawChoiceDisplay(screen, event, SIZE)
         result = ChoiceDisplay(event, SIZE)
+        finished = update(event)
 
 if result == 1:
     FPS = 10
@@ -173,6 +190,7 @@ elif rnd == 3:
 
 
 while not finished and main_snake.death == 0:
+
     clock.tick(FPS)
     '''
     
@@ -267,6 +285,7 @@ while not finished and main_snake.death == 0:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             main_snake.veer()
+            finished = update(event)
 
     '''
     
@@ -310,6 +329,7 @@ name = ''
 pygame.mixer.music.load('music\\fivecardshuffle.mp3')
 pygame.mixer.music.play(-1)
 while not finished and not right_pressed:
+
     '''
     
     Рисуем экран, на котором пишется всякая всячина
@@ -337,6 +357,7 @@ while not finished and not right_pressed:
                 right_pressed = True
             else:
                 name += letter
+        finished = update(event)
 
 '''
 
@@ -358,5 +379,6 @@ while not finished and not bottom_pressed:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             bottom_pressed = True
+        finished = update(event)
 
 pygame.quit()
