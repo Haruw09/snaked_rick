@@ -43,7 +43,7 @@ def DrawField(screen):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH, mo.HEIGHT))
 
 
-def EndGameDisplay(screen, score, name):
+def EndGameDisplay(screen, score, name, size):
     """
 
     Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
@@ -69,8 +69,13 @@ def EndGameDisplay(screen, score, name):
     text_name, rect = my_font.render(str(name), mo.BLACK)
     screen.blit(text_name, (500, 70))
 
-    text_press_right, rect = my_font.render('PRESS --> TO CONTINUE', mo.BLACK)
+    text_press_right, rect = my_font.render('PRESS KEY -> TO CONTINUE', mo.BLACK)
     screen.blit(text_press_right, (10, 130))
+    rick_surf = pygame.image.load('images\\end.png')
+    rick_surf = pygame.transform.scale(rick_surf, ((rick_surf.get_width(),
+                                                    rick_surf.get_height())))
+    rick_rect = rick_surf.get_rect(bottomright=(size * 10.6 * mo.WIDTH / 10, 75 * size * mo.HEIGHT / 80))
+    screen.blit(rick_surf, rick_rect)
 
 
 def DrawStartDisplay(screen, event, size):
@@ -95,6 +100,7 @@ def DrawStartDisplay(screen, event, size):
                        size * mo.HEIGHT / 10)
 
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 40)
+    small_font =  pygame.freetype.Font('fonts\\comic.ttf', 20)
     level, rect, = my_font.render("LEVEL 1", mo.BLACK)
     screen.blit(level, (size * 95 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     level, rect = my_font.render("LEVEL 2", mo.BLACK)
@@ -112,12 +118,13 @@ def DrawStartDisplay(screen, event, size):
     screen.blit(table, (size * 295 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
     table, rect = my_font.render("LEVEL 3")
     screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
-
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50)
     text, rect = text_font.render("Choose your level!")
     screen.blit(text, (size * 18 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
     text, rect = text_font.render("Table of results")
     screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
+    text, rect = small_font.render("Music by Kevin MacLeod")
+    screen.blit(text, (size * 50 * mo.WIDTH / 70, 14 * size * mo.HEIGHT / 15))
     description, rect = text_font.render("Eat all the Morties")
     screen.blit(description, (size * 18 * mo.WIDTH / 70, 8 * size * mo.HEIGHT / 60))
     description, rect = text_font.render("or they'll eat you")

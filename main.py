@@ -316,7 +316,7 @@ while not finished and not right_pressed:
     '''
     pygame.display.update()
     screen.fill(WHITE)
-    vis.EndGameDisplay(screen, score, name)
+    vis.EndGameDisplay(screen, score, name, SIZE)
 
     '''
     
