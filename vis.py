@@ -6,6 +6,14 @@ pygame.freetype.init()
 SIZE = 16
 
 
+def DrawImage(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
+    surface = pygame.image.load(name)
+    surface = pygame.transform.scale(surface, ((int(surface.get_width() * scale * size / 20),
+                                                int(surface.get_height() * scale * size / 20))))
+    rectangle = surface.get_rect(bottomright=(size * bottom_right_x * width, size * bottom_right_y * height))
+    screen.blit(surface, rectangle)
+
+
 def DrawSnake(coordinates, color, head_color, screen):
     """
 
