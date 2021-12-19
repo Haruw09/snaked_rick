@@ -127,7 +127,7 @@ class GameManager:
             vis.draw_wall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, self.screen)
 
     def draw_food(self):
-        for num in range(self.number_of_food):
+        for num in self.live_food:
             vis.draw_snake(self.food[num].coordinates, self.food[num].color, self.food[num].head_color, self.screen)
 
     def new_food(self, num):
@@ -142,6 +142,8 @@ class GameManager:
             for another_num in range(num):
                 if self.live_food[another_num] == self.live_food[num]:
                     flag = 0
+
+
     def choose_music(self):
         rnd = randint(1, 3)
         if rnd == 1:
@@ -161,6 +163,13 @@ class GameManager:
     def food_turn(self, wall):
         for num in self.live_food:
             self.food[num].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
+
+    def move_food(self):
+        for num in self.live_food:
+            self.food[num].move_miss = (self.food[num].move_miss + 1) % (self.food[num].miss + 1)
+            if self.food[num].move_miss == self.food[num].miss:
+                self.food[num].move_tail()
+                self.food[num].move_head(self.food[num].direction)
 
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):

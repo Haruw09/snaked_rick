@@ -108,17 +108,7 @@ while not finished and game.main_snake.death == 0:
             y_end = game.main_snake.coordinates[l - 1][1]
             game.main_snake.elongation(x_end, y_end)
             game.score += game.score_for_food
-            flag = 0
-            while flag == 0:
-                game.live_food[num] = randint(0, len(game.food) - 1)
-                x = game.food[game.live_food[num]].coordinates[0][0]
-                y = game.food[game.live_food[num]].coordinates[0][1]
-                for wall in game.walls:
-                    if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
-                        flag = 1
-                for another_num in range(num):
-                    if game.live_food[another_num] == game.live_food[num]:
-                        flag = 0
+            game.new_food(num)
     '''
     Проверяем, не укусила ли змея сама себя
     Если да, то змея умирает
@@ -147,11 +137,7 @@ while not finished and game.main_snake.death == 0:
     Змея - еда двигается в зависимости от своей скорости
     Еда двигается на клетку каждый 2 ход (game.food[food_number].miss + 1)
     '''
-    for num in game.live_food:
-        game.food[num].move_miss = (game.food[num].move_miss + 1) % (game.food[num].miss + 1)
-        if game.food[num].move_miss == game.food[num].miss:
-            game.food[num].move_tail()
-            game.food[num].move_head(game.food[num].direction)
+    game.move_food()
 '''
 Игра закончилась, подготавливаемся к экрану конца игры
 name - это имя, которое введёт пользователь
