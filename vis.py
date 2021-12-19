@@ -90,12 +90,17 @@ def draw_wall(x_begin, y_begin, x_end, y_end, color, screen):
 
 
 def draw_field(screen, size):
+    """
+    Рисование стартового экрана
+    :param screen: экран, на котором рисуется
+    :param size: число пикселей в квадратике
+    :return: нарисованное поле
+    """
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH * size, mo.HEIGHT * size))
 
 
 def draw_start_display(screen, event, size):
     draw_field(screen, size)
-
     draw_text("Snaked Rick", head_font, 6, 1, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     for i in range(0, 3, 1):
         draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, button_font,
@@ -132,9 +137,9 @@ def draw_choice_display(screen, event, size):
     """
 
     :param screen: экран отрисовки
-    :param event: событие, чтобы при наведении
-    :param size:
-    :return:
+    :param event: событие, чтобы при наведении кнопка обводилась
+    :param size: число пискселей в квадратике
+    :return: нарисованный экран выбора сложности
     """
     draw_field(screen, size)
     draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
@@ -173,15 +178,10 @@ def draw_table(screen, table, place, size):
     """
 
     Рисуем экран с таблицей лидеров
-
     Так же на экране пишется, какое место в таблице занял игрок
-
     Если игрок не занял никакого места, то пишем другую фразу
-
     screen - экран
-
     table - массив с очками и именами игроков
-
     place - место игрока в этой таблице
     """
     draw_field(screen, size)

@@ -456,6 +456,12 @@ class MainSnake(Snakes):
         self.death = 0
 
     def elongation(self, x_end, y_end):
+        """
+        Функция удлинения
+        :param x_end:
+        :param y_end:
+        :return:
+        """
         self.coordinates.append([x_end, y_end])
 
     def veer(self):
