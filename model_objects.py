@@ -94,7 +94,7 @@ class GameManager:
             pygame.display.update()
             for event in pygame.event.get():
                 vis.draw_choice_display(self.screen, event, SIZE)
-                result = control.ChoiceDisplay(event, SIZE)
+                result = control.choice_display(event, SIZE)
                 finished = control.update(event)
 
         if result == 1:
@@ -296,16 +296,10 @@ class GameManager:
         '''
         Функция выбирает рандомную песню и проигрывает её
         '''
-        rnd = randint(1, 3)
-        if rnd == 1:
-            pygame.mixer.music.load('music\\breaktime.mp3')
-            pygame.mixer.music.play(-1)
-        elif rnd == 2:
-            pygame.mixer.music.load('music\\carefree.mp3')
-            pygame.mixer.music.play(-1)
-        elif rnd == 3:
-            pygame.mixer.music.load('music\\fretless.mp3')
-            pygame.mixer.music.play(-1)
+        music = ['music\\breaktime.mp3', 'music\\carefree.mp3', 'music\\fretless.mp3']
+        rnd = randint(0, 2)
+        pygame.mixer.music.load(music[rnd])
+        pygame.mixer.music.play(-1)
 
     def wall_collision(self, wall):
         '''
