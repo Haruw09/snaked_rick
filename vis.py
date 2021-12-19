@@ -41,6 +41,14 @@ def draw_text(text, font, x, y, size, screen, width, height, color):
     screen.blit(vis_text, (x * size * width / 20, y * size * height / 20))
 
 
+def draw_rect_button(screen, color, x, y, delta_x, delta_y, font, text, text_color, x_text, y_text, size, width,
+                     height):
+    pygame.draw.rect(screen, color,
+                     (size * x * width, size * y * height, size * delta_x * width,
+                      size * delta_y * height))
+    draw_text(text, font, 20 * (x_text + x), 20 * (y_text + y), size, screen, width, height, text_color)
+
+
 def draw_snake(coordinates, color, head_color, screen):
     """
     Функция рисует змейку по квадратикам.
