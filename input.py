@@ -117,7 +117,7 @@ def read_file(file_name):
     return file
 
 
-def top_entry(score, changing_name):
+def top_entry(score, changing_name, top_number):
     """
 
     Функция проверяет, попал ли игрок в таблицу лидеров
@@ -134,7 +134,13 @@ def top_entry(score, changing_name):
 
     20 элемент - место текущего игрока в этой таблице (Если место больше 10, то в всегда будет отдавать 11)
     """
-    file = read_file('other\\top.txt')
+    if top_number == 1:
+        file = read_file('other/top_1.txt')
+    elif top_number == 2:
+        file = read_file('other/top_2.txt')
+    elif top_number == 3:
+        file = read_file('other/top_3.txt')
+
     top = []
     names = []
     place = 11
@@ -156,7 +162,7 @@ def top_entry(score, changing_name):
                 place = i + 1
 
     table = []
-    out = open('other\\top.txt', 'w')
+    out = open('other/top_1.txt', 'w')
     for i in range(9):
         out.write(str(top[i]) + ' ' + str(names[i]) + '\n')
         table.append(str(top[i]))

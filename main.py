@@ -114,10 +114,13 @@ while not finished and result == 0:
 
 if result == 1:
     walls = input.read_wall_data('levels\\Lvl_1.txt')
+    top_number = 1
 elif result == 2:
     walls = input.read_wall_data('levels\\Lvl_2.txt')
+    top_number = 2
 elif result == 3:
     walls = input.read_wall_data('levels\\Lvl_3.txt')
+    top_number = 3
 
 result = 0
 while not finished and result == 0:
@@ -361,7 +364,7 @@ while not finished and not right_pressed:
 
 Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
 '''
-table = input.top_entry(score, name)
+table = input.top_entry(score, name, top_number)
 
 '''
 
