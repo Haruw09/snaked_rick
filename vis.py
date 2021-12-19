@@ -69,28 +69,13 @@ def draw_field(screen, size):
     pygame.draw.rect(screen, mo.WHITE, (0, 0, mo.WIDTH * size, mo.HEIGHT * size))
 
 
-def draw_end_display(screen, score, name, size):
-    """
-    Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
-    screen - экран, на котором всё пишется
-    score - счёт игрока
-    name - имя игрока
-    """
-    draw_field(screen, size)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
-    draw_text("Game over. Your score is ", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    draw_text(str(score), my_font, 545 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    draw_text("Write your name: ", my_font, 10 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    draw_text(str(name), my_font, 400 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    draw_text('Press key "->" to continue', my_font, 10 / 41, 130 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    draw_image('images\\end.png', size, 1, screen, 1.06, 75 / 80, mo.WIDTH, mo.HEIGHT)
-
-
 def draw_start_display(screen, event, size):
     draw_field(screen, size)
     head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * size / 20)
-    head, rect = head_font.render("Snaked Rick", mo.BLACK)
-    screen.blit(head, (size * 9 * mo.WIDTH / 30, size * mo.HEIGHT / 20))
+    my_font = pygame.freetype.Font('fonts\\comic.ttf', 40 * size / 20)
+    small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * size / 20)
+    text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
+    draw_text("Snaked Rick", head_font, 6, 1, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     pygame.draw.rect(screen, mo.ORANGE,
                      (size * 90 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
                       size * mo.HEIGHT / 9))
@@ -106,9 +91,6 @@ def draw_start_display(screen, event, size):
                        size * mo.HEIGHT / 10)
     pygame.draw.circle(screen, mo.YELLOW_GREEN, (55 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
                        size * mo.HEIGHT / 10)
-
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 40 * size / 20)
-    small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * size / 20)
     level, rect, = my_font.render("LEVEL 1", mo.BLACK)
     screen.blit(level, (size * 95 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
     level, rect = my_font.render("LEVEL 2", mo.BLACK)
@@ -126,17 +108,11 @@ def draw_start_display(screen, event, size):
     screen.blit(table, (size * 295 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
     table, rect = my_font.render("LEVEL 3")
     screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
-    text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
-    text, rect = text_font.render("Choose your level!")
-    screen.blit(text, (size * 18 * mo.WIDTH / 70, 7 * size * mo.HEIGHT / 15))
-    text, rect = text_font.render("Table of results")
-    screen.blit(text, (size * 18 * mo.WIDTH / 70, 12 * size * mo.HEIGHT / 15))
-    text, rect = small_font.render("Music by Kevin MacLeod")
-    screen.blit(text, (size * 50 * mo.WIDTH / 70, 14 * size * mo.HEIGHT / 15))
-    description, rect = text_font.render("Eat all the Morties")
-    screen.blit(description, (size * 18 * mo.WIDTH / 70, 8 * size * mo.HEIGHT / 60))
-    description, rect = text_font.render("or they'll eat you")
-    screen.blit(description, (size * 20 * mo.WIDTH / 70, 1 * size * mo.HEIGHT / 5))
+    draw_text("Eat all the Morties", text_font, 36 / 7, 8 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("or they'll eat you", text_font, 40 / 7, 4, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Choose your level!", text_font, 36 / 7, 28 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Table of results", text_font, 36 / 7, 48 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Music by Kevin MacLeod", small_font, 100 / 7, 56 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     if event.type == pygame.MOUSEMOTION:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:
             if size * 90 * mo.WIDTH / 700 <= event.pos[0] <= size * (9 / 70 + 99 / 500) * mo.WIDTH:
@@ -182,8 +158,7 @@ def draw_choice_display(screen, event, size):
     hard, rect = my_font.render("HARD", mo.BLACK)
     screen.blit(hard, (size * 26 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
-    text_level, rect = text_font.render("Choose your difficulty level!")
-    screen.blit(text_level, (size * 8 * mo.WIDTH / 60, 3 * size * mo.HEIGHT / 70))
+    draw_text("Choose your difficulty level!", text_font, 8 / 3, 6 / 7, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\Rick1.png', size, 2 / 5, screen, 79 / 80, 13 / 30, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\pickle_rick.png', size, 1 / 4, screen, 4 / 10, 79 / 80, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\portal.png', size, 1 / 2, screen, 9 / 10, 7 / 8, mo.WIDTH, mo.HEIGHT)
@@ -204,6 +179,23 @@ def draw_choice_display(screen, event, size):
                                  (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH,
                                   size * mo.HEIGHT / 7),
                                  2)
+
+
+def draw_end_display(screen, score, name, size):
+    """
+    Функция рисует экран, после проигрыша игры, на котором происходит ввод имени игрока
+    screen - экран, на котором всё пишется
+    score - счёт игрока
+    name - имя игрока
+    """
+    draw_field(screen, size)
+    my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
+    draw_text("Game over. Your score is ", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text(str(score), my_font, 545 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text("Write your name: ", my_font, 10 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text(str(name), my_font, 400 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_text('Press key "->" to continue', my_font, 10 / 41, 130 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    draw_image('images\\end.png', size, 1, screen, 1.06, 75 / 80, mo.WIDTH, mo.HEIGHT)
 
 
 def draw_table(screen, table, place, size):
