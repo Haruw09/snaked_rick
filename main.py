@@ -32,15 +32,9 @@ HEIGHT = 41
 SIZE = vis.SIZE
 
 screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
-game = mo.GameManager(WIDTH, HEIGHT, screen)
-'''
-Задаём параметры экрана
-'''
-
-
-
 pygame.display.update()
 clock = pygame.time.Clock()
+game = mo.GameManager(WIDTH, HEIGHT, screen, clock)
 
 game.start_display_1()
 
@@ -52,11 +46,13 @@ game.play_display()
 name - это имя, которое введёт пользователь
 right_pressed - флаг, который сработает, когда нажмётся стрелочка вправо
 '''
-right_pressed = False
+
 '''
 Экран ввода имени
 Работает, пока не нажата стрелочка вправо
 '''
+finished = False
+right_pressed = False
 pygame.mixer.music.load('music\\fivecardshuffle.mp3')
 pygame.mixer.music.play(-1)
 while not finished and not right_pressed:

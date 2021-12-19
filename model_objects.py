@@ -1,8 +1,13 @@
-from random import randint
+import random
+
 import pygame
-import vis
-import control
+from random import randint
+
 import input
+import model_objects as mo
+import vis
+import time
+import control
 
 # Цвета
 RED = 0xFF0000
@@ -24,7 +29,7 @@ SIZE = 15
 
 
 class GameManager:
-    def __init__(self, WIDTH, HEIGHT, screen):
+    def __init__(self, WIDTH, HEIGHT, screen, clock):
         self.FPS = 30
         self.score = 0
         self.score_for_food = 1
@@ -40,6 +45,7 @@ class GameManager:
         self.top_number = 0
         self.score = 0
         self.screen = screen
+        self.clock = clock
 
         self.walls = []
         self.main_snake = []
@@ -124,12 +130,12 @@ class GameManager:
 
         finished = False
         while not finished and self.main_snake.death == 0:
-            clock.tick(self.FPS)
+            self.clock.tick(self.FPS)
             '''
             Создаём чистый экран
             '''
             pygame.display.update()
-            screen.fill(WHITE)
+            self.screen.fill(WHITE)
             '''
             Работаем со стенами (С каждой отдельно)
             '''
