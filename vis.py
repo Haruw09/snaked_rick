@@ -81,41 +81,18 @@ def draw_start_display(screen, event, size):
     draw_field(screen, size)
     head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * size / 20)
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 40 * size / 20)
+    medium_font = pygame.freetype.Font('fonts\\comic.ttf', 35 * size / 20)
     small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * size / 20)
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
     draw_text("Snaked Rick", head_font, 6, 1, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    pygame.draw.rect(screen, mo.ORANGE,
-                     (size * 90 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                      size * mo.HEIGHT / 9))
-    pygame.draw.rect(screen, mo.ORANGE,
-                     (size * 290 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                      size * mo.HEIGHT / 9))
-    pygame.draw.rect(screen, mo.ORANGE,
-                     (size * 490 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                      size * mo.HEIGHT / 9))
-    pygame.draw.circle(screen, mo.YELLOW_GREEN, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
-                       size * mo.HEIGHT / 10)
-    pygame.draw.circle(screen, mo.YELLOW_GREEN, (35 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
-                       size * mo.HEIGHT / 10)
-    pygame.draw.circle(screen, mo.YELLOW_GREEN, (55 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
-                       size * mo.HEIGHT / 10)
-    level, rect, = my_font.render("LEVEL 1", mo.BLACK)
-    screen.blit(level, (size * 95 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-    level, rect = my_font.render("LEVEL 2", mo.BLACK)
-    screen.blit(level, (size * 295 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-    level, rect = my_font.render("LEVEL 3", mo.BLACK)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 35 * size / 20)
-    screen.blit(level, (size * 495 * mo.WIDTH / 700, 11 * size * mo.HEIGHT / 30))
-    table, rect = my_font.render("Table of")
-    screen.blit(table, (size * 95 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
-    screen.blit(table, (size * 295 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
-    screen.blit(table, (size * 495 * mo.WIDTH / 700, 185 * size * mo.HEIGHT / 300))
-    table, rect = my_font.render("LEVEL 1")
-    screen.blit(table, (size * 95 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
-    table, rect = my_font.render("LEVEL 2")
-    screen.blit(table, (size * 295 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
-    table, rect = my_font.render("LEVEL 3")
-    screen.blit(table, (size * 495 * mo.WIDTH / 700, 205 * size * mo.HEIGHT / 300))
+    for i in range(0, 3, 1):
+        draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, my_font, "LEVEL " + str(i + 1),
+                         mo.BLACK, 5 / 700, 1 / 30, size, mo.WIDTH, mo.HEIGHT)
+        pygame.draw.circle(screen, mo.YELLOW_GREEN, ((20 * i + 15) * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
+                           size * mo.HEIGHT / 10)
+        draw_text("Table of", medium_font, (400 * i + 190) / 70, 370 / 30, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("LEVEL " + str(i + 1), medium_font, (400 * i + 190) / 70, 410 / 30, size, screen, mo.WIDTH, mo.HEIGHT,
+                  mo.BLACK)
     draw_text("Eat all the Morties", text_font, 36 / 7, 8 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text("or they'll eat you", text_font, 40 / 7, 4, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text("Choose your level!", text_font, 36 / 7, 28 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
