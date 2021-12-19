@@ -5,6 +5,12 @@ import model_objects as mo
 pygame.freetype.init()
 SIZE = 15
 
+head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * SIZE / 20)
+button_font = pygame.freetype.Font('fonts\\comic.ttf', 40 * SIZE / 20)
+medium_font = pygame.freetype.Font('fonts\\comic.ttf', 35 * SIZE / 20)
+small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * SIZE / 20)
+my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * SIZE / 20)
+text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * SIZE / 20)
 
 def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
     """
@@ -88,14 +94,10 @@ def draw_field(screen, size):
 
 def draw_start_display(screen, event, size):
     draw_field(screen, size)
-    head_font = pygame.freetype.Font("fonts\\COOPBL.TTF", 60 * size / 20)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 40 * size / 20)
-    medium_font = pygame.freetype.Font('fonts\\comic.ttf', 35 * size / 20)
-    small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * size / 20)
-    text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
+
     draw_text("Snaked Rick", head_font, 6, 1, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     for i in range(0, 3, 1):
-        draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, my_font, "LEVEL " + str(i + 1),
+        draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, button_font, "LEVEL " + str(i + 1),
                          mo.BLACK, 5 / 700, 1 / 30, size, mo.WIDTH, mo.HEIGHT)
         draw_rect_border(screen, mo.BLACK, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, size, 2, mo.WIDTH, mo.HEIGHT,
                          event)
@@ -126,8 +128,6 @@ def draw_start_display(screen, event, size):
 
 def draw_choice_display(screen, event, size):
     draw_field(screen, size)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
-    text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
     draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
                      mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
     draw_rect_button(screen, mo.YELLOW, 1 / 3, 3 / 7, 1 / 3, 1 / 7, my_font, "MEDIUM",
@@ -152,7 +152,6 @@ def draw_end_display(screen, score, name, size):
     name - имя игрока
     """
     draw_field(screen, size)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
     draw_text("Game over. Your score is ", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text(str(score), my_font, 545 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text("Write your name: ", my_font, 10 / 41, 70 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
