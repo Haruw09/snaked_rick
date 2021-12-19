@@ -29,6 +29,7 @@ def TableButtons(event, size):
         elif (event.pos[0] - size * 55 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
                 size * mo.HEIGHT / 10) ** 2:
             return 3
+    return 0
 
 def ChoiceDisplay(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:

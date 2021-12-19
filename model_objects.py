@@ -1,3 +1,4 @@
+from random import randint
 import pygame
 import vis
 import control
@@ -28,6 +29,7 @@ class GameManager:
         self.score = 0
         self.score_for_food = 1
         self.number_of_food = 3
+        self.live_food = [0] * self.number_of_food
         '''
         Параметры экрана (Ширина, Высота и масштаб, т.е. кол-во пикселей в одном игровом квадратике)
         '''
@@ -35,7 +37,7 @@ class GameManager:
         self.HEIGHT = HEIGHT
 
         self.name = ''
-        self.top_number = 1
+        self.top_number = 0
         self.score = 0
         self.screen = screen
 
@@ -57,8 +59,12 @@ class GameManager:
                     result = control.StartDisplay(event, SIZE)
                     finished = control.update(event)
                     self.top_number = control.TableButtons(event, SIZE)
+                    if self.top_number != 0:
+                        screen_number = 2
                 else:
-                    table_display()
+                    self.table_display()
+                    screen_number = 1
+                    self.top_number = 0
 
         if result == 1:
             self.walls = input.read_wall_data('levels\\Lvl_1.txt')
@@ -97,7 +103,7 @@ class GameManager:
         table = input.top_entry(self.score, self.name, self.top_number)
         finished = False
         '''
-        Здесь игрок модет полубоваться таблицей лидеров
+        Здесь игрок модет полюбоваться таблицей лидеров
         Закрыть окно можно, нажав любую кнопку
         '''
         bottom_pressed = False
@@ -115,6 +121,46 @@ class GameManager:
 
     def read_food(self):
         self.food = input.read_food_data('other\\food.txt')
+
+    def draw_walls(self):
+        for wall in self.walls:
+            vis.draw_wall(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end, wall.color, self.screen)
+
+    def draw_food(self):
+        for num in range(self.number_of_food):
+            vis.draw_snake(self.food[num].coordinates, self.food[num].color, self.food[num].head_color, self.screen)
+
+    def new_food(self, num):
+        flag = 0
+        while flag == 0:
+            self.live_food[num] = randint(0, len(self.food) - 1)
+            x = self.food[self.live_food[num]].coordinates[0][0]
+            y = self.food[self.live_food[num]].coordinates[0][1]
+            for wall in self.walls:
+                if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
+                    flag = 1
+            for another_num in range(num):
+                if self.live_food[another_num] == self.live_food[num]:
+                    flag = 0
+    def choose_music(self):
+        rnd = randint(1, 3)
+        if rnd == 1:
+            pygame.mixer.music.load('music\\breaktime.mp3')
+            pygame.mixer.music.play(-1)
+        elif rnd == 2:
+            pygame.mixer.music.load('music\\carefree.mp3')
+            pygame.mixer.music.play(-1)
+        elif rnd == 3:
+            pygame.mixer.music.load('music\\fretless.mp3')
+            pygame.mixer.music.play(-1)
+
+    def wall_collision(self, wall):
+        if wall.collision(self.main_snake.coordinates[0][0], self.main_snake.coordinates[0][1]):
+            self.main_snake.death = 1
+
+    def food_turn(self, wall):
+        for num in self.live_food:
+            self.food[num].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
 
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):
