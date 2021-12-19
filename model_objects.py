@@ -1,4 +1,7 @@
 import pygame
+import vis
+import control
+import input
 
 # Цвета
 RED = 0xFF0000
@@ -16,6 +19,72 @@ ORANGE = (217, 232, 12)
 
 WIDTH = 41
 HEIGHT = 41
+SIZE = 15
+
+
+class GameManager:
+    def __init__(self, WIDTH, HEIGHT, screen):
+        self.FPS = 30
+        self.score = 0
+        self.number_of_food = 3
+        '''
+        Параметры экрана (Ширина, Высота и масштаб, т.е. кол-во пикселей в одном игровом квадратике)
+        '''
+        self.WIDTH = WIDTH
+        self.HEIGHT = HEIGHT
+
+        self.name = ''
+        self.top_number = 1
+        self.score = 0
+        self.walls = []
+        self.screen = screen
+
+    def start_display_1(self):
+        screen_number = 1
+        finished = False
+        result = 0
+        pygame.mixer.music.load('music\\fasterdoesit.mp3')
+        pygame.mixer.music.play(-1)
+        while not finished and result == 0:
+            pygame.display.update()
+            for event in pygame.event.get():
+                if screen_number == 1:
+                    vis.draw_start_display(self.screen, event, SIZE)
+                    result = control.StartDisplay(event, SIZE)
+                    finished = control.update(event)
+                    self.top_number = control.TableButtons(event, SIZE)
+                else:
+                    table_display(self.score, self.name, self.top_number)
+
+        if result == 1:
+            self.walls = input.read_wall_data('levels\\Lvl_1.txt')
+            self.top_number = 1
+        elif result == 2:
+            self.walls = input.read_wall_data('levels\\Lvl_2.txt')
+            self.top_number = 2
+        elif result == 3:
+            self.walls = input.read_wall_data('levels\\Lvl_3.txt')
+            self.top_number = 3
+
+    def table_display(self, score, name, top_number):
+        '''
+        Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
+        '''
+        table = input.top_entry(score, name, top_number)
+        finished = False
+        '''
+        Здесь игрок модет полубоваться таблицей лидеров
+        Закрыть окно можно, нажав любую кнопку
+        '''
+        bottom_pressed = False
+        while not finished and not bottom_pressed:
+            pygame.display.update()
+            self.screen.fill(WHITE)
+            vis.draw_table(self.screen, table, table[20], SIZE)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    bottom_pressed = True
+                    finished = control.update(event)
 
 
 class Wall:
