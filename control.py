@@ -7,7 +7,7 @@ import vis
 import time
 
 
-def StartDisplay(event, size):
+def start_display(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:
             if size * 90 * mo.WIDTH / 700 <= event.pos[0] <= size * (9 / 70 + 99 / 500) * mo.WIDTH:
@@ -18,7 +18,8 @@ def StartDisplay(event, size):
                 return 3
     return 0
 
-def TableButtons(event, size):
+
+def table_buttons(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if (event.pos[0] - size * 15 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
                 size * mo.HEIGHT / 10) ** 2:
@@ -31,6 +32,7 @@ def TableButtons(event, size):
             return 3
     return 0
 
+
 def ChoiceDisplay(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if size / 3 * mo.WIDTH <= event.pos[0] <= 2 * size / 3 * mo.WIDTH:
@@ -41,6 +43,7 @@ def ChoiceDisplay(event, size):
             elif 5 * size * mo.HEIGHT / 7 <= event.pos[1] <= 6 * size * mo.HEIGHT / 7:
                 return 3
     return 0
+
 
 def update(event):
     """

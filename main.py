@@ -11,7 +11,6 @@ import control
 
 pygame.init()
 
-
 '''
 Цвета
 '''
@@ -30,20 +29,14 @@ YELLOW_GREEN = (154, 205, 50)
 WIDTH = 41
 HEIGHT = 41
 SIZE = vis.SIZE
-
 screen = pygame.display.set_mode((WIDTH * SIZE, HEIGHT * SIZE))
+
 pygame.display.update()
 clock = pygame.time.Clock()
 game = mo.GameManager(WIDTH, HEIGHT, screen, clock)
-
 game.start_display_1()
-
 game.start_display_2()
-
 game.play_display()
-
 game.endgame_display()
-
 game.table_display()
-
 pygame.quit()

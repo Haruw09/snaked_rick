@@ -1,6 +1,7 @@
 from model_objects import Wall, MainSnake, Food
 import pygame
 
+
 def read_wall_data(input_filename):
     """
 

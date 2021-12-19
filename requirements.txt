@@ -1,2 +1,2 @@
-py -m pip install pygame
-py -m pip install pygame.freetype
+pygame
+pygame.freetype

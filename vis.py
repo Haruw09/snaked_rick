@@ -176,7 +176,6 @@ def draw_table(screen, table, place, size):
     place - место игрока в этой таблице
     """
     draw_field(screen, size)
-    my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
     if place <= 10:
         draw_text("Congratulations!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
         draw_text("Your place is ", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)

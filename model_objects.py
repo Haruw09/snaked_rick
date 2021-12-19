@@ -65,9 +65,9 @@ class GameManager:
             for event in pygame.event.get():
                 if screen_number == 1:
                     vis.draw_start_display(self.screen, event, SIZE)
-                    result = control.StartDisplay(event, SIZE)
+                    result = control.start_display(event, SIZE)
                     finished = control.update(event)
-                    self.top_number = control.TableButtons(event, SIZE)
+                    self.top_number = control.table_buttons(event, SIZE)
                     if self.top_number != 0:
                         screen_number = 2
                 else:
@@ -292,7 +292,6 @@ class GameManager:
                 if self.live_food[another_num] == self.live_food[num]:
                     flag = 0
 
-
     def choose_music(self):
         '''
         Функция выбирает рандомную песню и проигрывает её
@@ -365,6 +364,7 @@ class GameManager:
                 self.main_snake.veer()
                 finished = control.update(event)
                 return finished
+
 
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):
