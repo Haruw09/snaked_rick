@@ -100,21 +100,13 @@ while not finished and game.main_snake.death == 0:
     Проверяем, скушала ли змея еду
     Если да, то создаётся новая еда, а змейка вырастает на одну ячейку
     '''
-    for num in range(game.number_of_food):
-        food_number = game.live_food[num]
-        if game.main_snake.collision(game.food[food_number].coordinates) == 1:
-            l = len(game.main_snake.coordinates)
-            x_end = game.main_snake.coordinates[l - 1][0]
-            y_end = game.main_snake.coordinates[l - 1][1]
-            game.main_snake.elongation(x_end, y_end)
-            game.score += game.score_for_food
-            game.new_food(num)
+    game.eating()
     '''
     Проверяем, не укусила ли змея сама себя
     Если да, то змея умирает
     '''
-    if game.main_snake.collision(game.main_snake.coordinates) == 0:
-        game.main_snake.death = 1
+    game.bite()
+
     '''
     Рисуем змею
     '''
@@ -123,10 +115,8 @@ while not finished and game.main_snake.death == 0:
     Проверяем нажатые клавиши
     Если нажата клавиша w, a, s или d, то змея поворачивается в нужном направлении
     '''
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            game.main_snake.veer()
-        finished = control.update(event)
+    finished = game.wasd()
+
     '''
     Двигаем змею
     Сначала хвост, потом голову

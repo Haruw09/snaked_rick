@@ -171,6 +171,28 @@ class GameManager:
                 self.food[num].move_tail()
                 self.food[num].move_head(self.food[num].direction)
 
+    def eating(self):
+        for num in range(self.number_of_food):
+            food_number = self.live_food[num]
+            if self.main_snake.collision(self.food[food_number].coordinates) == 1:
+                l = len(self.main_snake.coordinates)
+                x_end = self.main_snake.coordinates[l - 1][0]
+                y_end = self.main_snake.coordinates[l - 1][1]
+                self.main_snake.elongation(x_end, y_end)
+                self.score += self.score_for_food
+                self.new_food(num)
+
+    def bite(self):
+        if self.main_snake.collision(self.main_snake.coordinates) == 0:
+            self.main_snake.death = 1
+
+    def wasd(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                self.main_snake.veer()
+                finished = control.update(event)
+                return finished
+
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):
         """
