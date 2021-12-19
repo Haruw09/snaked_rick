@@ -54,7 +54,7 @@ def start_display(event, size):
     """
     for number_button in range(1, 4):
         if click_rect(event, (20 * number_button - 11) / 70, 1 / 3, 99 / 500, 1 / 9, size, mo.WIDTH, mo.HEIGHT):
-            return number_button + 1
+            return number_button
     return 0
 
 

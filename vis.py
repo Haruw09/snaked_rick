@@ -36,6 +36,9 @@ def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width,
 def draw_text(text, font, x, y, size, screen, width, height, color):
     """
     Вывод заданного текста на экран
+    :param height: высота в квадратиках
+    :param width: ширина в квадратиках
+    :param size: размер квадратика в пикселах
     :param text: текст в кавычках, который хочется вывести
     :param font: шрифт, которым нужно писать
     :param x: абсцисса начала текста

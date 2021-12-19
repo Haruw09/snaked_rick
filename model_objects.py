@@ -103,8 +103,8 @@ class GameManager:
             self.score_for_food = 3
 
     def play_display(self):
-        self.read_main_snake()
-        self.read_food()
+        self.read_file('main_snake.txt')
+        self.read_file('food.txt')
 
         '''
         Рисуем начальные положения всех объектов
@@ -230,17 +230,14 @@ class GameManager:
                     bottom_pressed = True
                     self.finished = control.update(event)
 
-    def read_main_snake(self):
+    def read_file(self, file):
         '''
         Функция считывает информацию о главной змейке и заносит её в соответствующее место
         '''
-        self.main_snake = input.read_main_snake_data('other\\main_snake.txt')
-
-    def read_food(self):
-        '''
-            Функция считывает информацию о змеях - еде и заносит её в соответствующее место
-        '''
-        self.food = input.read_food_data('other\\food.txt')
+        if file == 'food.txt':
+            self.food = input.read_data('other\\' + file, data=file)
+        if file == 'main_snake.txt':
+            self.main_snake = input.read_data('other\\' + file, data=file)
 
     def read_walls(self):
         '''

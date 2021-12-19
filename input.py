@@ -35,47 +35,21 @@ def read_wall_data(input_filename):
 
     return walls
 
-
-def read_main_snake_data(input_filename):
-    """
-
-    Считывает данные о главной змее из файла
-
-    input_filename - имя считываемого файла
-
-    Входные данные должны представлять из себя строку, состоящую из
-
-    <Координаты, введённые через пробел> <Ориентация головы змеи (w, a, s или d)> <Цвет змеи>
-    """
-    with open(input_filename, 'r') as input_file:
-        for line in input_file:
-            if len(line.strip()) == 0 or line[0] == '#':
-                continue
-
-            tokens = line.split(' ')
-            direction = tokens[-2]
-            coordinates = []
-            for i in range(0, len(tokens) - 2, 2):
-                cell = []
-                cell.append(int(tokens[i]))
-                cell.append(int(tokens[i + 1]))
-                coordinates.append(cell)
-
-            snake = MainSnake(coordinates, direction)
-
-    return snake
-
-
-def read_food_data(input_filename):
+def read_data(input_filename, data=''):
     """
 
     Считывает данные о змеях-еде из файла, создаёт сами объекты и вызывает создание их графических образов
 
     input_filename - имя считываемого файла
     """
-    foods = []
+    if data == 'main_snake.txt':
+        function = MainSnake
+    if data == 'food.txt':
+        function = Food
+    array = []
     with open(input_filename, 'r') as input_file:
-        for line in input_file:
+        lines = input_file.readlines()
+        for line in lines:
             if len(line.strip()) == 0 or line[0] == '#':
                 continue
 
@@ -88,9 +62,11 @@ def read_food_data(input_filename):
                 cell.append(int(tokens[i + 1]))
                 coordinates.append(cell)
 
-            snake = Food(coordinates, direction)
-            foods.append(snake)
-    return foods
+            if line == lines[-1] and not len(array):
+                array = function(coordinates, direction)
+            else:
+                array += [function(coordinates, direction)]
+    return array
 
 
 def read_file(file_name):
@@ -132,12 +108,7 @@ def top_entry(score, changing_name, top_number):
 
     20 элемент - место текущего игрока в этой таблице (Если место больше 10, то в всегда будет отдавать 11)
     """
-    if top_number == 1:
-        file = read_file('other/top_1.txt')
-    elif top_number == 2:
-        file = read_file('other/top_2.txt')
-    elif top_number == 3:
-        file = read_file('other/top_3.txt')
+    file = read_file('other/top_' + str(top_number) + '.txt')
 
     top = []
     names = []
