@@ -50,7 +50,8 @@ def draw_rect_button(screen, color, x, y, delta_x, delta_y, font, text, text_col
 
 
 def draw_rect_border(screen, color, x, y, delta_x, delta_y, size, rect_width, width, height, event):
-    if event.type == pygame.MOUSEMOTION and x * size * width <= event.pos[0] <= (x + delta_x) * size * width and y * size * height <= \
+    if event.type == pygame.MOUSEMOTION and x * size * width <= event.pos[0] <= (
+            x + delta_x) * size * width and y * size * height <= \
             event.pos[1] <= (y + delta_y) * size * height:
         pygame.draw.rect(screen, color,
                          (size * x * width, size * y * height, size * delta_x * width,
@@ -129,32 +130,18 @@ def draw_choice_display(screen, event, size):
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
     draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
                      mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
-
     draw_rect_button(screen, mo.YELLOW, 1 / 3, 3 / 7, 1 / 3, 1 / 7, my_font, "MEDIUM",
                      mo.BLACK, 1 / 20, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
     draw_rect_button(screen, mo.RED, 1 / 3, 5 / 7, 1 / 3, 1 / 7, my_font, "HARD",
                      mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
+    for i in range(0, 3, 1):
+        draw_rect_border(screen, mo.BLACK, 1 / 3, (1 + 2 * i) / 7, 1 / 3, 1 / 7, size, 2, mo.WIDTH, mo.HEIGHT,
+                         event)
     draw_text("Choose your difficulty level!", text_font, 8 / 3, 6 / 7, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\Rick1.png', size, 2 / 5, screen, 79 / 80, 13 / 30, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\pickle_rick.png', size, 1 / 4, screen, 4 / 10, 79 / 80, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\portal.png', size, 1 / 2, screen, 9 / 10, 7 / 8, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\wubba.png', size, 1 / 5, screen, 3 / 10, 45 / 80, mo.WIDTH, mo.HEIGHT)
-    if event.type == pygame.MOUSEMOTION:
-        if size * mo.WIDTH / 3 <= event.pos[0] <= 2 * size * mo.WIDTH / 3:
-            if size * mo.HEIGHT / 7 <= event.pos[1] <= 2 * size * mo.HEIGHT / 7:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7),
-                                 2)
-            elif 3 * size * mo.HEIGHT / 7 <= event.pos[1] <= 4 * size * mo.HEIGHT / 7:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH,
-                                  size * mo.HEIGHT / 7),
-                                 2)
-            elif 5 * size * mo.HEIGHT / 7 <= event.pos[1] <= 6 * size * mo.HEIGHT / 7:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH,
-                                  size * mo.HEIGHT / 7),
-                                 2)
 
 
 def draw_end_display(screen, score, name, size):
