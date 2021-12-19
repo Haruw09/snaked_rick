@@ -188,6 +188,36 @@ class GameManager:
             '''
             self.move_food()
 
+    def endgame_display(self):
+        finished = False
+        right_pressed = False
+        pygame.mixer.music.load('music\\fivecardshuffle.mp3')
+        pygame.mixer.music.play(-1)
+        while not finished and not right_pressed:
+            '''
+            Рисуем экран, на котором пишется всякая всячина
+            '''
+            pygame.display.update()
+            self.screen.fill(WHITE)
+            vis.draw_end_display(self.screen, self.score, self.name, SIZE)
+            '''
+            Проверяем, нажата ли какая-либо клавиша
+            Если нажата, то заставляем функцию alphabet возвращает эту кнопку
+            При нажатом BACKSPACE стирается последний символ
+            При нажатии правой стрелочки ввод заканчивается 
+            '''
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    key = pygame.key.get_pressed()
+                    letter = input.alphabet(event, key)
+                    if letter == 'BACKSPACE':
+                        self.name = self.name[:-1]
+                    elif letter == 'RIGHT':
+                        right_pressed = True
+                    else:
+                        self.name += letter
+                finished = control.update(event)
+
     def table_display(self):
         '''
         Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров

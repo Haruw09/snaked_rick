@@ -162,7 +162,12 @@ def top_entry(score, changing_name, top_number):
                 place = i + 1
 
     table = []
-    out = open('other/top_1.txt', 'w')
+    if top_number == 1:
+        out = open('other/top_1.txt', 'w')
+    elif top_number == 2:
+        out = open('other/top_2.txt', 'w')
+    else:
+        out = open('other/top_3.txt', 'w')
     for i in range(9):
         out.write(str(top[i]) + ' ' + str(names[i]) + '\n')
         table.append(str(top[i]))
