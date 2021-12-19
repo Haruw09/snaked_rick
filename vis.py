@@ -12,6 +12,7 @@ small_font = pygame.freetype.Font('fonts\\comic.ttf', 20 * SIZE / 20)
 my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * SIZE / 20)
 text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * SIZE / 20)
 
+
 def draw_image(name, size, scale, screen, bottom_right_x, bottom_right_y, width, height):
     """
     Вывод картинки на экран
@@ -97,7 +98,8 @@ def draw_start_display(screen, event, size):
 
     draw_text("Snaked Rick", head_font, 6, 1, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     for i in range(0, 3, 1):
-        draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, button_font, "LEVEL " + str(i + 1),
+        draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, button_font,
+                         "LEVEL " + str(i + 1),
                          mo.BLACK, 5 / 700, 1 / 30, size, mo.WIDTH, mo.HEIGHT)
         draw_rect_border(screen, mo.BLACK, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, size, 2, mo.WIDTH, mo.HEIGHT,
                          event)
@@ -127,6 +129,13 @@ def draw_start_display(screen, event, size):
 
 
 def draw_choice_display(screen, event, size):
+    """
+
+    :param screen: экран отрисовки
+    :param event: событие, чтобы при наведении
+    :param size:
+    :return:
+    """
     draw_field(screen, size)
     draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
                      mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)

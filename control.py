@@ -7,6 +7,14 @@ import vis
 import time
 
 
+def click_rect(event, x, y, delta_x, delta_y, size, width, height):
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if x * size * width <= event.pos[0] <= (x + delta_x) * size * width:
+            if y * size * height <= event.pos[1] <= (y + delta_y) * size * height:
+                return 1
+    return 0
+
+
 def start_display(event, size):
     if event.type == pygame.MOUSEBUTTONDOWN:
         if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:

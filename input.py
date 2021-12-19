@@ -30,7 +30,6 @@ def read_wall_data(input_filename):
             y_begin = int(tokens[1])
             x_end = int(tokens[2])
             y_end = int(tokens[3])
-            color = tokens[4]
             wall = Wall(x_begin, y_begin, x_end, y_end)
             walls.append(wall)
 
@@ -54,7 +53,6 @@ def read_main_snake_data(input_filename):
                 continue
 
             tokens = line.split(' ')
-            color = tokens[-1]
             direction = tokens[-2]
             coordinates = []
             for i in range(0, len(tokens) - 2, 2):
@@ -82,7 +80,6 @@ def read_food_data(input_filename):
                 continue
 
             tokens = line.split(' ')
-            color = tokens[-1]
             direction = tokens[-2]
             coordinates = []
             for i in range(0, len(tokens) - 2, 2):
