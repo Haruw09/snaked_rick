@@ -129,20 +129,14 @@ def draw_start_display(screen, event, size):
 
 def draw_choice_display(screen, event, size):
     draw_field(screen, size)
-    pygame.draw.rect(screen, mo.GREEN,
-                     (size / 3 * mo.WIDTH, size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
-    pygame.draw.rect(screen, mo.YELLOW,
-                     (size / 3 * mo.WIDTH, 3 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
-    pygame.draw.rect(screen, mo.RED,
-                     (size / 3 * mo.WIDTH, 5 * size * mo.HEIGHT / 7, size / 3 * mo.WIDTH, size * mo.HEIGHT / 7))
     my_font = pygame.freetype.Font('fonts\\comic.ttf', 45 * size / 20)
-    easy, rect = my_font.render("EASY", mo.BLACK)
-    screen.blit(easy, (size * 52 * mo.WIDTH / 120, 13 * size * mo.HEIGHT / 70))
-    medium, rect = my_font.render("MEDIUM", mo.BLACK)
-    screen.blit(medium, (size * 46 * mo.WIDTH / 120, 33 * size * mo.HEIGHT / 70))
-    hard, rect = my_font.render("HARD", mo.BLACK)
-    screen.blit(hard, (size * 26 * mo.WIDTH / 60, 53 * size * mo.HEIGHT / 70))
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
+    draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
+                     mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
+    draw_rect_button(screen, mo.YELLOW, 1 / 3, 3 / 7, 1 / 3, 1 / 7, my_font, "MEDIUM",
+                     mo.BLACK, 1 / 20, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
+    draw_rect_button(screen, mo.RED, 1 / 3, 5 / 7, 1 / 3, 1 / 7, my_font, "HARD",
+                     mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
     draw_text("Choose your difficulty level!", text_font, 8 / 3, 6 / 7, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\Rick1.png', size, 2 / 5, screen, 79 / 80, 13 / 30, mo.WIDTH, mo.HEIGHT)
     draw_image('images\\pickle_rick.png', size, 1 / 4, screen, 4 / 10, 79 / 80, mo.WIDTH, mo.HEIGHT)
