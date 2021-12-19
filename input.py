@@ -35,18 +35,19 @@ def read_wall_data(input_filename):
 
     return walls
 
+
 def read_data(input_filename, data=''):
     """
 
-    Считывает данные о змеях-еде из файла, создаёт сами объекты и вызывает создание их графических образов
+    Считывает данные о змеях из файла, создаёт сами объекты и вызывает создание их графических образов
 
     input_filename - имя считываемого файла
     """
     if data == 'main_snake.txt':
-        function = MainSnake
-    if data == 'food.txt':
-        function = Food
-    array = []
+        snake_function = MainSnake
+    else:
+        snake_function = Food
+    snake_data = []
     with open(input_filename, 'r') as input_file:
         lines = input_file.readlines()
         for line in lines:
@@ -57,16 +58,13 @@ def read_data(input_filename, data=''):
             direction = tokens[-2]
             coordinates = []
             for i in range(0, len(tokens) - 2, 2):
-                cell = []
-                cell.append(int(tokens[i]))
-                cell.append(int(tokens[i + 1]))
-                coordinates.append(cell)
+                coordinates += [[int(tokens[i]), int(tokens[i + 1])]]
 
-            if line == lines[-1] and not len(array):
-                array = function(coordinates, direction)
+            if line == lines[-1] and not len(snake_data):
+                snake_data = snake_function(coordinates, direction)
             else:
-                array += [function(coordinates, direction)]
-    return array
+                snake_data += [snake_function(coordinates, direction)]
+    return snake_data
 
 
 def read_file(file_name):
