@@ -26,6 +26,7 @@ class GameManager:
     def __init__(self, WIDTH, HEIGHT, screen):
         self.FPS = 30
         self.score = 0
+        self.score_for_food = 1
         self.number_of_food = 3
         '''
         Параметры экрана (Ширина, Высота и масштаб, т.е. кол-во пикселей в одном игровом квадратике)
@@ -36,8 +37,11 @@ class GameManager:
         self.name = ''
         self.top_number = 1
         self.score = 0
-        self.walls = []
         self.screen = screen
+
+        self.walls = []
+        self.main_snake = []
+        self.food = []
 
     def start_display_1(self):
         screen_number = 1
@@ -54,7 +58,7 @@ class GameManager:
                     finished = control.update(event)
                     self.top_number = control.TableButtons(event, SIZE)
                 else:
-                    table_display(self.score, self.name, self.top_number)
+                    table_display()
 
         if result == 1:
             self.walls = input.read_wall_data('levels\\Lvl_1.txt')
@@ -66,11 +70,31 @@ class GameManager:
             self.walls = input.read_wall_data('levels\\Lvl_3.txt')
             self.top_number = 3
 
-    def table_display(self, score, name, top_number):
+    def start_display_2(self):
+        finished = False
+        result = 0
+        while not finished and result == 0:
+            pygame.display.update()
+            for event in pygame.event.get():
+                vis.draw_choice_display(self.screen, event, SIZE)
+                result = control.ChoiceDisplay(event, SIZE)
+                finished = control.update(event)
+
+        if result == 1:
+            self.FPS = 10
+            self.score_for_food = 1
+        elif result == 2:
+            self.FPS = 20
+            self.score_for_food = 2
+        elif result == 3:
+            self.FPS = 30
+            self.score_for_food = 3
+
+    def table_display(self):
         '''
         Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
         '''
-        table = input.top_entry(score, name, top_number)
+        table = input.top_entry(self.score, self.name, self.top_number)
         finished = False
         '''
         Здесь игрок модет полубоваться таблицей лидеров
@@ -86,6 +110,11 @@ class GameManager:
                     bottom_pressed = True
                     finished = control.update(event)
 
+    def read_main_snake(self):
+        self.main_snake = input.read_main_snake_data('other\\main_snake.txt')
+
+    def read_food(self):
+        self.food = input.read_food_data('other\\food.txt')
 
 class Wall:
     def __init__(self, x_begin, y_begin, x_end, y_end):

@@ -44,30 +44,13 @@ clock = pygame.time.Clock()
 
 game.start_display_1()
 
-finished = False
-result = 0
-while not finished and result == 0:
-    pygame.display.update()
-    for event in pygame.event.get():
-        vis.draw_choice_display(screen, event, SIZE)
-        result = control.ChoiceDisplay(event, SIZE)
-        finished = control.update(event)
-
-if result == 1:
-    FPS = 10
-    score_for_food = 1
-elif result == 2:
-    FPS = 20
-    score_for_food = 2
-elif result == 3:
-    FPS = 30
-    score_for_food = 3
+game.start_display_2()
 
 '''
 Считываем файлы с параметрами змейки, стен и змеек - еды
 '''
-main_snake = input.read_main_snake_data('other\\main_snake.txt')
-food = input.read_food_data('other\\food.txt')
+game.read_main_snake()
+game.read_food()
 
 '''
 Рисуем начальные положения всех объектов
@@ -80,9 +63,9 @@ live_food = [0] * game.number_of_food
 for num in range(game.number_of_food):
     flag = 0
     while flag == 0:
-        live_food[num] = randint(0, len(food) - 1)
-        x = food[live_food[num]].coordinates[0][0]
-        y = food[live_food[num]].coordinates[0][1]
+        live_food[num] = randint(0, len(game.food) - 1)
+        x = game.food[live_food[num]].coordinates[0][0]
+        y = game.food[live_food[num]].coordinates[0][1]
         for wall in game.walls:
             if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
                 flag = 1
@@ -90,9 +73,9 @@ for num in range(game.number_of_food):
             if live_food[another_num] == live_food[num]:
                 flag = 0
 
-    vis.draw_snake(food[num].coordinates, food[num].color, food[num].head_color, screen)
+    vis.draw_snake(game.food[num].coordinates, game.food[num].color, game.food[num].head_color, screen)
 
-vis.draw_snake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
+vis.draw_snake(game.main_snake.coordinates, game.main_snake.color, game.main_snake.head_color, screen)
 vis.draw_field(screen, SIZE)
 
 '''
@@ -109,8 +92,9 @@ elif rnd == 3:
     pygame.mixer.music.load('music\\fretless.mp3')
     pygame.mixer.music.play(-1)
 
-while not finished and main_snake.death == 0:
-    clock.tick(FPS)
+finished = False
+while not finished and game.main_snake.death == 0:
+    clock.tick(game.FPS)
     '''
     Создаём чистый экран
     '''
@@ -128,37 +112,37 @@ while not finished and main_snake.death == 0:
         Проверяем, ударилась ли главная змея со стеной
         Если да, то главная змея умирает
         '''
-        if wall.collision(main_snake.coordinates[0][0], main_snake.coordinates[0][1]):
-            main_snake.death = 1
+        if wall.collision(game.main_snake.coordinates[0][0], game.main_snake.coordinates[0][1]):
+            game.main_snake.death = 1
         '''
         Проверяем, дошла ли змея - еда до стены
         Если да, то она развернётся
         '''
         for num in live_food:
-            food[num].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
+            game.food[num].turn(wall.x_begin, wall.y_begin, wall.x_end, wall.y_end)
     '''
     Рисуем змейку-еду
     '''
     for num in live_food:
-        vis.draw_snake(food[num].coordinates, food[num].color, food[num].head_color, screen)
+        vis.draw_snake(game.food[num].coordinates, game.food[num].color, game.food[num].head_color, screen)
     '''
     Проверяем, скушала ли змея еду
     Если да, то создаётся новая еда, а змейка вырастает на одну ячейку
     '''
     for num in range(game.number_of_food):
         food_number = live_food[num]
-        if main_snake.collision(food[food_number].coordinates) == 1:
-            l = len(main_snake.coordinates)
-            x_end = main_snake.coordinates[l - 1][0]
-            y_end = main_snake.coordinates[l - 1][1]
-            main_snake.elongation(x_end, y_end)
-            score += score_for_food
+        if game.main_snake.collision(game.food[food_number].coordinates) == 1:
+            l = len(game.main_snake.coordinates)
+            x_end = game.main_snake.coordinates[l - 1][0]
+            y_end = game.main_snake.coordinates[l - 1][1]
+            game.main_snake.elongation(x_end, y_end)
+            game.score += game.score_for_food
             flag = 0
             while flag == 0:
-                live_food[num] = randint(0, len(food) - 1)
-                x = food[live_food[num]].coordinates[0][0]
-                y = food[live_food[num]].coordinates[0][1]
-                for wall in walls:
+                live_food[num] = randint(0, len(game.food) - 1)
+                x = game.food[live_food[num]].coordinates[0][0]
+                y = game.food[live_food[num]].coordinates[0][1]
+                for wall in game.walls:
                     if not (wall.x_begin <= x <= wall.x_end and wall.y_begin <= y <= wall.y_end):
                         flag = 1
                 for another_num in range(num):
@@ -168,35 +152,35 @@ while not finished and main_snake.death == 0:
     Проверяем, не укусила ли змея сама себя
     Если да, то змея умирает
     '''
-    if main_snake.collision(main_snake.coordinates) == 0:
-        main_snake.death = 1
+    if game.main_snake.collision(game.main_snake.coordinates) == 0:
+        game.main_snake.death = 1
     '''
     Рисуем змею
     '''
-    vis.draw_snake(main_snake.coordinates, main_snake.color, main_snake.head_color, screen)
+    vis.draw_snake(game.main_snake.coordinates, game.main_snake.color, game.main_snake.head_color, screen)
     '''
     Проверяем нажатые клавиши
     Если нажата клавиша w, a, s или d, то змея поворачивается в нужном направлении
     '''
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            main_snake.veer()
+            game.main_snake.veer()
         finished = control.update(event)
     '''
     Двигаем змею
     Сначала хвост, потом голову
     '''
-    main_snake.move_tail()
-    main_snake.move_head(main_snake.direction)
+    game.main_snake.move_tail()
+    game.main_snake.move_head(game.main_snake.direction)
     '''
     Змея - еда двигается в зависимости от своей скорости
-    Еда двигается на клетку каждый 2 ход (food[food_number].miss + 1)
+    Еда двигается на клетку каждый 2 ход (game.food[food_number].miss + 1)
     '''
     for num in live_food:
-        food[num].move_miss = (food[num].move_miss + 1) % (food[num].miss + 1)
-        if food[num].move_miss == food[num].miss:
-            food[num].move_tail()
-            food[num].move_head(food[num].direction)
+        game.food[num].move_miss = (game.food[num].move_miss + 1) % (game.food[num].miss + 1)
+        if game.food[num].move_miss == game.food[num].miss:
+            game.food[num].move_tail()
+            game.food[num].move_head(game.food[num].direction)
 '''
 Игра закончилась, подготавливаемся к экрану конца игры
 name - это имя, которое введёт пользователь
@@ -227,13 +211,13 @@ while not finished and not right_pressed:
             key = pygame.key.get_pressed()
             letter = input.alphabet(event, key)
             if letter == 'BACKSPACE':
-                name = name[:-1]
+                game.name = game.name[:-1]
             elif letter == 'RIGHT':
                 right_pressed = True
             else:
-                name += letter
+                game.name += letter
         finished = control.update(event)
 
-game.table_display(game.score, game.name, game.top_number)
+game.table_display()
 
 pygame.quit()
