@@ -51,36 +51,32 @@ class GameManager:
         self.main_snake = []
         self.food = []
 
+        self.finished = False
+
     def start_display_1(self):
         '''
         Функция занимается всем на первом предыгровом экане
         '''
         screen_number = 1
-        finished = False
         result = 0
         pygame.mixer.music.load('music\\fasterdoesit.mp3')
         pygame.mixer.music.play(-1)
-        while not finished and result == 0:
+        while not self.finished and not result:
             pygame.display.update()
             for event in pygame.event.get():
                 if screen_number == 1:
                     vis.draw_start_display(self.screen, event, SIZE)
                     result = control.start_display(event, SIZE)
-                    finished = control.update(event)
+                    self.finished = control.update(event)
                     self.top_number = control.table_buttons(event, SIZE)
-                    if self.top_number != 0:
+                    if self.top_number:
                         screen_number = 2
                 else:
                     self.table_display()
                     screen_number = 1
                     self.top_number = 0
 
-        if result == 1:
-            self.top_number = 1
-        elif result == 2:
-            self.top_number = 2
-        elif result == 3:
-            self.top_number = 3
+        self.top_number = result
 
         self.read_walls()
 
@@ -88,14 +84,13 @@ class GameManager:
         '''
         Функция занимается всем на втором предыгровом экане
         '''
-        finished = False
         result = 0
-        while not finished and result == 0:
+        while not self.finished and result == 0:
             pygame.display.update()
             for event in pygame.event.get():
                 vis.draw_choice_display(self.screen, event, SIZE)
                 result = control.choice_display(event, SIZE)
-                finished = control.update(event)
+                self.finished = control.update(event)
 
         if result == 1:
             self.FPS = 10
@@ -128,8 +123,7 @@ class GameManager:
         '''
         self.choose_music()
 
-        finished = False
-        while not finished and self.main_snake.death == 0:
+        while not self.finished and self.main_snake.death == 0:
             self.clock.tick(self.FPS)
             '''
             Создаём чистый экран
@@ -174,7 +168,7 @@ class GameManager:
             Проверяем нажатые клавиши
             Если нажата клавиша w, a, s или d, то змея поворачивается в нужном направлении
             '''
-            finished = self.wasd()
+            self.finished = self.wasd()
 
             '''
             Двигаем змею
@@ -189,11 +183,10 @@ class GameManager:
             self.move_food()
 
     def endgame_display(self):
-        finished = False
         right_pressed = False
         pygame.mixer.music.load('music\\fivecardshuffle.mp3')
         pygame.mixer.music.play(-1)
-        while not finished and not right_pressed:
+        while not self.finished and not right_pressed:
             '''
             Рисуем экран, на котором пишется всякая всячина
             '''
@@ -207,6 +200,7 @@ class GameManager:
             При нажатии правой стрелочки ввод заканчивается 
             '''
             for event in pygame.event.get():
+                self.finished = control.update(event)
                 if event.type == pygame.KEYDOWN:
                     key = pygame.key.get_pressed()
                     letter = input.alphabet(event, key)
@@ -216,27 +210,25 @@ class GameManager:
                         right_pressed = True
                     else:
                         self.name += letter
-                finished = control.update(event)
 
     def table_display(self):
         '''
         Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
         '''
         table = input.top_entry(self.score, self.name, self.top_number)
-        finished = False
         '''
         Здесь игрок может полюбоваться таблицей лидеров
         Закрыть окно можно, нажав любую кнопку
         '''
         bottom_pressed = False
-        while not finished and not bottom_pressed:
+        while not self.finished and not bottom_pressed:
             pygame.display.update()
             self.screen.fill(WHITE)
             vis.draw_table(self.screen, table, table[20], SIZE)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     bottom_pressed = True
-                    finished = control.update(event)
+                    self.finished = control.update(event)
 
     def read_main_snake(self):
         '''
@@ -356,8 +348,8 @@ class GameManager:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 self.main_snake.veer()
-                finished = control.update(event)
-                return finished
+                self.finished = control.update(event)
+                return self.finished
 
 
 class Wall:

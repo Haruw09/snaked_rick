@@ -5,6 +5,7 @@ import input
 import model_objects as mo
 import vis
 import time
+from math import hypot
 
 
 def click_rect(event, x, y, delta_x, delta_y, size, width, height):
@@ -18,12 +19,29 @@ def click_rect(event, x, y, delta_x, delta_y, size, width, height):
     :param size: число пикселей в одном квадратике
     :param width: ширина поля в пикселях
     :param height: высота поля в пикселях
-    :return: True или False в зависимости от того является ли событие нажатием
+    :return: True или False в зависимости от того является ли событие нажатием по кнопке
     """
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if x * size * width <= event.pos[0] <= (x + delta_x) * size * width:
-            if y * size * height <= event.pos[1] <= (y + delta_y) * size * height:
-                return True
+        if 0 <= event.pos[0] / size / width - x <= delta_x and 0 <= event.pos[1] / size / height - y <= delta_y:
+            return True
+    return False
+
+
+def click_circle(event: pygame.event, x, y, r, size, width, height):
+    """
+    Функция определяет, является ли событие нажатием в области окружности
+    :param event: событие пайгейма
+    :param x: абсцисса левого верхнего угла прямоугольника
+    :param y: ордината
+    :param r: радиус кнопки
+    :param size: число пикселей в одном квадратике
+    :param width: ширина поля в пикселях
+    :param height: высота поля в пикселях
+    :return: True или False в зависимости от того является ли событие нажатием по кнопке
+    """
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if hypot(x - event.pos[0] / size / width, y - event.pos[1] / size / height) <= r:
+            return True
     return False
 
 
@@ -34,23 +52,16 @@ def start_display(event, size):
     :param size: число пикселей в одном игровом квадратике
     :return: число от 1 до 3 - выбранный уровень или 0 если уровень не выбран
     """
-    for number_button in range(0, 3, 1):
-        if click_rect(event, (20 * number_button + 9) / 70, 1 / 3, 99 / 500, 1 / 9, size, mo.WIDTH, mo.HEIGHT):
+    for number_button in range(1, 4):
+        if click_rect(event, (20 * number_button - 11) / 70, 1 / 3, 99 / 500, 1 / 9, size, mo.WIDTH, mo.HEIGHT):
             return number_button + 1
     return 0
 
 
 def table_buttons(event, size):
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if (event.pos[0] - size * 15 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
-                size * mo.HEIGHT / 10) ** 2:
-            return 1
-        elif (event.pos[0] - size * 35 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
-                size * mo.HEIGHT / 10) ** 2:
-            return 2
-        elif (event.pos[0] - size * 55 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
-                size * mo.HEIGHT / 10) ** 2:
-            return 3
+    for i in range(1, 4):
+        if click_circle(event, (-5 + 20 * i) / 70, 2 / 3, 1 / 10, size, mo.WIDTH, mo.HEIGHT):
+            return i
     return 0
 
 
@@ -67,7 +78,7 @@ def choice_display(event, size):
     return 0
 
 
-def update(event):
+def update(event: pygame.event):
     """
     Проверка на закрытие программы
     :param event: пайгеймовский евент
@@ -75,7 +86,7 @@ def update(event):
     """
     if event.type == pygame.QUIT:
         return True
-    elif event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE:
+    elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         return True
     else:
         return False
