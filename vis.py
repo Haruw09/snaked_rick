@@ -49,8 +49,9 @@ def draw_rect_button(screen, color, x, y, delta_x, delta_y, font, text, text_col
     draw_text(text, font, 20 * (x_text + x), 20 * (y_text + y), size, screen, width, height, text_color)
 
 
-def draw_border(screen, color, x, y, delta_x, delta_y, rect_width, width, height, event):
-    if event.type == pygame.MOUSEMOTION and x <= event.pos[0] <= x + delta_x and y <= event.pos[0] <= y + delta_y:
+def draw_rect_border(screen, color, x, y, delta_x, delta_y, size, rect_width, width, height, event):
+    if event.type == pygame.MOUSEMOTION and x * size * width <= event.pos[0] <= (x + delta_x) * size * width and y * size * height <= \
+            event.pos[1] <= (y + delta_y) * size * height:
         pygame.draw.rect(screen, color,
                          (size * x * width, size * y * height, size * delta_x * width,
                           size * delta_y * height), rect_width)
@@ -95,6 +96,8 @@ def draw_start_display(screen, event, size):
     for i in range(0, 3, 1):
         draw_rect_button(screen, mo.ORANGE, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, my_font, "LEVEL " + str(i + 1),
                          mo.BLACK, 5 / 700, 1 / 30, size, mo.WIDTH, mo.HEIGHT)
+        draw_rect_border(screen, mo.BLACK, (20 * i + 9) / 70, 1 / 3, 99 / 500, 1 / 9, size, 2, mo.WIDTH, mo.HEIGHT,
+                         event)
         pygame.draw.circle(screen, mo.YELLOW_GREEN, ((20 * i + 15) * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
                            size * mo.HEIGHT / 10)
         draw_text("Table of", medium_font, (400 * i + 190) / 70, 370 / 30, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
@@ -106,20 +109,6 @@ def draw_start_display(screen, event, size):
     draw_text("Table of results", text_font, 36 / 7, 48 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text("Music by Kevin MacLeod", small_font, 100 / 7, 56 / 3, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     if event.type == pygame.MOUSEMOTION:
-        if size * mo.HEIGHT / 3 <= event.pos[1] <= 4 * size * mo.HEIGHT / 9:
-            if size * 90 * mo.WIDTH / 700 <= event.pos[0] <= size * (9 / 70 + 99 / 500) * mo.WIDTH:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size * 90 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                                  size * mo.HEIGHT / 9),
-                                 2)
-            elif size * 290 * mo.WIDTH / 700 <= event.pos[0] <= size * (29 / 70 + 99 / 500) * mo.WIDTH:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size * 290 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                                  size * mo.HEIGHT / 9), 2)
-            elif size * 490 * mo.WIDTH / 700 <= event.pos[0] <= size * (49 / 70 + 99 / 500) * mo.WIDTH:
-                pygame.draw.rect(screen, mo.BLACK,
-                                 (size * 490 * mo.WIDTH / 700, size * mo.HEIGHT / 3, size * 99 * mo.WIDTH / 500,
-                                  size * mo.HEIGHT / 9), 2)
         if (event.pos[0] - size * 15 * mo.WIDTH / 70) ** 2 + (event.pos[1] - size * 2 * mo.HEIGHT / 3) ** 2 <= (
                 size * mo.HEIGHT / 10) ** 2:
             pygame.draw.circle(screen, mo.BLACK, (15 * size * mo.WIDTH / 70, 2 * size * mo.HEIGHT / 3),
@@ -140,6 +129,7 @@ def draw_choice_display(screen, event, size):
     text_font = pygame.freetype.Font('fonts\\comic.ttf', 50 * size / 20)
     draw_rect_button(screen, mo.GREEN, 1 / 3, 1 / 7, 1 / 3, 1 / 7, my_font, "EASY",
                      mo.BLACK, 1 / 10, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
+
     draw_rect_button(screen, mo.YELLOW, 1 / 3, 3 / 7, 1 / 3, 1 / 7, my_font, "MEDIUM",
                      mo.BLACK, 1 / 20, 3 / 70, size, mo.WIDTH, mo.HEIGHT)
     draw_rect_button(screen, mo.RED, 1 / 3, 5 / 7, 1 / 3, 1 / 7, my_font, "HARD",
