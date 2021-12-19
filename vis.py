@@ -49,6 +49,13 @@ def draw_rect_button(screen, color, x, y, delta_x, delta_y, font, text, text_col
     draw_text(text, font, 20 * (x_text + x), 20 * (y_text + y), size, screen, width, height, text_color)
 
 
+def draw_border(screen, color, x, y, delta_x, delta_y, rect_width, width, height, event):
+    if event.type == pygame.MOUSEMOTION and x <= event.pos[0] <= x + delta_x and y <= event.pos[0] <= y + delta_y:
+        pygame.draw.rect(screen, color,
+                         (size * x * width, size * y * height, size * delta_x * width,
+                          size * delta_y * height), rect_width)
+
+
 def draw_snake(coordinates, color, head_color, screen):
     """
     Функция рисует змейку по квадратикам.
