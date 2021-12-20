@@ -188,13 +188,6 @@ def draw_table(screen, table, place, size):
     place - место игрока в этой таблице
     """
     draw_field(screen, size)
-    if place <= 10:
-        draw_text("Congratulations!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-        draw_text("Your place is ", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-        draw_text(str(place), my_font, 300 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-    else:
-        draw_text("You're too bad!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
-        draw_text("Try again!", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     for i in range(0, 10):
         draw_text(str(table[2 * i]), my_font, 10 / 41, (150 + i * 50) / 41, size, screen, mo.WIDTH,
                   mo.HEIGHT, mo.BLACK)
@@ -203,3 +196,23 @@ def draw_table(screen, table, place, size):
     draw_text("Press any key to exit", my_font, 10 / 41, 700 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_text("Thanks for playing!", my_font, 10 / 41, 750 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
     draw_image('images\\rickroll.jpg', size, 4 / 5, screen, 12 / 10, 65 / 80, mo.WIDTH, mo.HEIGHT)
+
+def draw_text_for_end_table(screen, size, place):
+    if place <= 10:
+        draw_text("Congratulations!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("Your place is ", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text(str(place), my_font, 300 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    else:
+        draw_text("You're too bad!", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("Try again!", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+
+def draw_text_for_table(screen, size, lvl_num):
+    if lvl_num == 1:
+        draw_text("Leaderboard", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("For lvl 1", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    elif lvl_num == 2:
+        draw_text("Leaderboard", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("For lvl 2", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+    else:
+        draw_text("Leaderboard", my_font, 10 / 41, 10 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)
+        draw_text("For lvl 3", my_font, 10 / 41, 60 / 41, size, screen, mo.WIDTH, mo.HEIGHT, mo.BLACK)

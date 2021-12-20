@@ -182,7 +182,7 @@ class GameManager:
             """
             self.move_food()
 
-    def endgame_display(self):
+    def endgame_display_1(self):
         right_pressed = False
         pygame.mixer.music.load('music\\fivecardshuffle.mp3')
         pygame.mixer.music.play(-1)
@@ -211,6 +211,26 @@ class GameManager:
                     else:
                         self.name += letter
 
+    def endgame_display_2(self):
+        """
+        Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
+        """
+        table = input.top_entry(self.score, self.name, self.top_number)
+        """
+        Здесь игрок может полюбоваться таблицей лидеров
+        Закрыть окно можно, нажав любую кнопку
+        """
+        bottom_pressed = False
+        while not self.finished and not bottom_pressed:
+            pygame.display.update()
+            self.screen.fill(WHITE)
+            vis.draw_table(self.screen, table, table[20], SIZE)
+            vis.draw_text_for_end_table(self.screen, SIZE, table[20])
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    bottom_pressed = True
+                    self.finished = control.update(event)
+
     def table_display(self):
         """
         Здесь читается, анализируется, переписывается и записывается обратно в файл таблица лидеров
@@ -225,6 +245,7 @@ class GameManager:
             pygame.display.update()
             self.screen.fill(WHITE)
             vis.draw_table(self.screen, table, table[20], SIZE)
+            vis.draw_text_for_table(self.screen, SIZE, self.top_number)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     bottom_pressed = True
